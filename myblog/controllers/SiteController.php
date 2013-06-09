@@ -15,14 +15,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $arr = parent::$db->db->getOne("select * from user");
+        $arr = $this->app()->database->db->getOne("select * from user");
         echo "<pre>";
         print_r($arr);
 
-        $arr2 = parent::$db->db2->getOne("select * from joke_user");
+        $arr2 = $this->app()->database->db2->getOne("select * from joke_user");
         print_r($arr2);
 
-        echo parent::$projectPath."<br>";
+        echo $this->app()->projectPath."<br>";
         
         echo "hello world!<br>";
 

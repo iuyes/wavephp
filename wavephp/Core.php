@@ -7,7 +7,7 @@ class Core
     public static $projectPath = '';
     public static $pathInfo = '';
     public static $frameworkPath = '';
-    public static $db = '';
+    public static $database = '';
 
     /**
      * 初始化
@@ -27,7 +27,7 @@ class Core
             self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '';
 
         //数据库连接
-        if(empty(self::$db)){
+        if(empty(self::$database)){
             $config = self::$projectPath.'config/main.php';
             if(file_exists($config)){
                 require $config;
@@ -38,12 +38,30 @@ class Core
                         foreach ($config['database'] as $key => $value) {
                             $ndb[$key] = new Mysql($value);
                         }
-                        self::$db = (object) $ndb;
+                        self::$database = (object) $ndb;
                         unset($ndb);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * 一些公共参数，供项目调用的
+     *
+     * 例如在项目中使用数据库 $this->app()->database->db->getOne("select * from user");
+     *
+     * @return object array
+     *
+     */
+    public function app()
+    {
+        $parameter = array();
+        $parameter['projectPath'] = self::$projectPath;
+        $parameter['frameworkPath'] = self::$frameworkPath;
+        $parameter['pathInfo'] = self::$pathInfo;
+        $parameter['database'] = self::$database;
+        return (object) $parameter;
     }
 
     /**
@@ -65,7 +83,7 @@ class Core
         self::$projectPath = '';
         self::$frameworkPath = '';
         self::$pathInfo = '';
-        self::$db = '';
+        self::$database = '';
     }
 
     /**

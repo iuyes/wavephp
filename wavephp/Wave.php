@@ -25,9 +25,9 @@ class Wave extends Core
         $Route->route();
 
         //关闭数据库连接
-        if(!empty(parent::$db)) {
-            foreach (parent::$db as $key => $value) {
-                parent::$db->$key->close();
+        if(!empty(parent::$database)) {
+            foreach (parent::$database as $key => $value) {
+                parent::$database->$key->close();
             }
         }
         $this->clear();
