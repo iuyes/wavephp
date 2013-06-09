@@ -29,11 +29,11 @@ class Route extends Core
     public function route()
     {
         $callarray = array();
-
-        if(!empty($this->pathInfo)){
-            $this->pathInfo = $this->filterStr($this->pathInfo);
-            $this->pathInfo = ltrim($this->pathInfo, '/');
-            $pathInfoArr = explode('/', $this->pathInfo);
+        $rpathInfo = parent::$pathInfo;
+        if(!empty($rpathInfo)){
+            $rpathInfo = $this->filterStr($rpathInfo);
+            $rpathInfo = ltrim($rpathInfo, '/');
+            $pathInfoArr = explode('/', $rpathInfo);
             $c = ucfirst($pathInfoArr[0]).'Controller';
             $f = !empty($pathInfoArr[1]) ? 'action'.ucfirst($pathInfoArr[1]) : 'actionIndex';
             if(count($pathInfoArr) > 2){
@@ -46,7 +46,7 @@ class Route extends Core
             $f = 'actionIndex';
         }
 
-        $controller = $this->projectPath.'controllers/'.$c.'.php';
+        $controller = parent::$projectPath.'controllers/'.$c.'.php';
         if(file_exists($controller)){
             $this->requireProjectFile('controllers/'.$c);
             if(class_exists($c)){
@@ -75,7 +75,7 @@ class Route extends Core
     public function error404()
     {
         echo "<h2>Error 404</h2>";
-        echo 'Unable to resolve the request "'.$this->pathInfo.'".';
+        echo 'Unable to resolve the request "'.parent::$pathInfo.'".';
     }
 
 }

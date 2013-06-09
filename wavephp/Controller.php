@@ -17,7 +17,7 @@ class Controller extends Core
      */
     public function render($filename, $data)
     {
-        echo $filename;die;
+        echo $filename."<br>";
     }
 
     
