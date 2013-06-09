@@ -5,7 +5,7 @@
 class SiteController extends Controller
 {
        
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -26,12 +26,13 @@ class SiteController extends Controller
         
         echo "hello world!<br>";
 
-
         $User = new User();
 
         echo "User model 加载成功！<br>";
 
         $this->render('index', array('username'=>'许萍'));
+
+        echo $this->Verifycode(4);
 
     }
     

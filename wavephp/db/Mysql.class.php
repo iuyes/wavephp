@@ -130,7 +130,6 @@ class Mysql
  
     /**
      * 显示自定义错误
-     *
      */
     public function msg() 
     {

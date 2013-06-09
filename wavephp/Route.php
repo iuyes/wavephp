@@ -25,6 +25,12 @@ class Route extends Core
 
     /**
      * route 处理
+     *
+     * 例如 index.php/site/index 会使用SiteController.php这个文件，调用actionIndex这个方法
+     * 例如 index.php/site/index/a/b 会使用SiteController.php这个文件，调用actionIndex($a, $b)这个方法
+     *
+     * 默认使用SiteController.php这个文件，调用actionIndex这个方法
+     *
      */
     public function route()
     {

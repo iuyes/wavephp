@@ -23,7 +23,8 @@ class Wave extends Core
         $this->requireFrameworkFile('Controller');
         $Route = new Route();
         $Route->route();
-        // var_dump(parent::$db);die;
+
+        //关闭数据库连接
         if(!empty(parent::$db)) {
             foreach (parent::$db as $key => $value) {
                 parent::$db->$key->close();
@@ -34,8 +35,14 @@ class Wave extends Core
     
 }
 
+
 /**
  * 自动加载函数
+ *
+ * 用于实例化数据库
+ * 例如 $User = new User();
+ * 会自动加载  项目路径/models/User.php 这个文件
+ * 
  */
 function __autoload($classname) {
     $filename = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/').'/models/'.$classname.".php";

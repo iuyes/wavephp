@@ -14,22 +14,26 @@ class Core
      */
     public function __construct()
     {
+        //项目路径
         if(empty(self::$projectPath)) 
             self::$projectPath = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
         
+        //框架路径
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
         
+        //url除去index.php之前的以及index.php
         if(empty(self::$pathInfo))
             self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '';
 
+        //数据库连接
         if(empty(self::$db)){
             $config = self::$projectPath.'config/main.php';
             if(file_exists($config)){
                 require $config;
                 if(isset($config['database'])){
                     if(!empty($config['database'])){
-                        include_once self::$frameworkPath.'db/Mysql.class.php';
+                        include_once self::$frameworkPath.'Db/Mysql.class.php';
                         $ndb = array();
                         foreach ($config['database'] as $key => $value) {
                             $ndb[$key] = new Mysql($value);
@@ -40,6 +44,17 @@ class Core
                 }
             }
         }
+    }
+
+    /**
+     * 加载文件，验证码类库等
+     *
+     * @param string file 文件名 
+     *
+     */
+    public function import($file)
+    {
+        $this->requireFrameworkFile('Library/'.$file.'.class');
     }
 
     /**
@@ -55,6 +70,9 @@ class Core
 
     /**
      * 框架内加载文件
+     *
+     * @param string file 文件名
+     *
      */
     public function requireFrameworkFile($file=null)
     {
@@ -67,6 +85,9 @@ class Core
 
     /**
      * 项目内加载文件
+     *
+     * @param string file 文件名
+     *
      */
     public function requireProjectFile($file=null)
     {
@@ -75,6 +96,22 @@ class Core
         }else{
             exit('no file');
         }
+    }
+
+    /**
+     * 验证码
+     *
+     * @param int $num 验证码个数
+     * 
+     * @return string
+     *
+     */
+    public function Verifycode($num)
+    {
+        $this->requireFrameworkFile('Library/Verifycode.class');
+
+        return '123456';
+
     }
 
 }
