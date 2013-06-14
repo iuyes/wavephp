@@ -61,7 +61,65 @@ class Mysql
             }
         }
     }
- 
+
+    /**
+     * 插入数据
+     *
+     * @param string $table         : 表名
+     * @param array  $array         : 数据数组
+     *
+     * @return boolean 
+     *
+     */
+    public function insertdb($table, $array)
+    {
+        $tbcolumn = $tbvalue = '';
+        foreach($array  as $key=>$value){
+            $tbcolumn .= '`'.$key.'`'.",";
+            $tbvalue  .= "'".$value."',";
+        }
+        $tbcolumn = "(".trim($tbcolumn,',').")";
+        $tbvalue = "(".trim($tbvalue,',').")";
+        $sql = "INSERT INTO `".$table."` ".$tbcolumn." VALUES ".$tbvalue;
+        if($this->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param string $table         : 表名
+     * @param array  $array         : 数据数组
+     * @param string $where_field   : Where子句的字段名
+     * @param string $where_value   : Where子句的值
+     * @param string $type          : Where子句是不是IN  
+     *
+     * @return boolean
+     *
+     */
+    public function updatedb($table, $array, $where_field, $where_value, $type=null)
+    {
+        $update = array();
+        foreach ($array as $key => $value){
+            $update[] = '`'.$key.'` = '."'".$value."'";
+        }
+        $update = implode(",",$update);
+        
+        if ($type == 'IN'){
+            $sql = "UPDATE `" . $table . "` SET " . $update . ' WHERE ' . $where_field . ' ' . $type . " " . $where_value;
+        }else{
+            $sql = "UPDATE `" . $table . "` SET " . $update . ' WHERE ' . $where_field . ' ' . $type . " '" . $where_value . "'";
+        }
+        if($this->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * 获得查询语句单条结果
      *

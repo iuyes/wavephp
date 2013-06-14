@@ -8,6 +8,7 @@ class Core
     public static $pathInfo = '';
     public static $frameworkPath = '';
     public static $database = '';
+    public static $autoload = true;
 
     /**
      * 初始化
@@ -65,14 +66,13 @@ class Core
     }
 
     /**
-     * 加载文件，验证码类库等
-     *
-     * @param string file 文件名 
-     *
+     * 加载模版
      */
-    public function import($file)
+    public function render($filename, $data)
     {
-        $this->requireFrameworkFile('Library/'.$file.'.class');
+        $classname = get_class($this);
+        $folder = strtolower(str_replace('Controller', '', $classname));
+        require self::$projectPath.'views/'.$folder.'/'.$filename.'.php'; 
     }
 
     /**

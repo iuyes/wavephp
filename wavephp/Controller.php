@@ -11,15 +11,6 @@ class Controller extends Core
     {
         parent::__construct();
     }
-
-    /**
-     * 加载模版
-     */
-    public function render($filename, $data)
-    {
-        echo $filename."<br>";
-    }
-
     
 }
 

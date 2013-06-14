@@ -15,7 +15,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $arr = $this->app()->database->db->getOne("select * from user");
+        $arr = $this->app()->database->db->getOne("select user from user");
         echo "<pre>";
         print_r($arr);
 
@@ -26,13 +26,18 @@ class SiteController extends Controller
         
         echo "hello world!<br>";
 
+        // spl_autoload_unregister(array('WaveBase','loader'));
+
         $User = new User();
 
         echo "User model 加载成功！<br>";
 
         $this->render('index', array('username'=>'许萍'));
 
-        echo $this->Verifycode(4);
+        // echo "<pre>";
+        // print_r(get_included_files());
+
+        // echo $this->Verifycode(4);
 
     }
     
