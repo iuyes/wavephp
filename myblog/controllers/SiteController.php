@@ -56,7 +56,7 @@ class SiteController extends Controller
      */
     public function actionVerifyCode()
     {
-        echo $this->verifyCode(5);
+        echo $this->verifyCode(4);
     }
     
 
