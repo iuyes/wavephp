@@ -5,10 +5,14 @@
 class Core
 {
     public static $projectPath = '';
+    public static $hostInfo = '';
     public static $pathInfo = '';
+    public static $homeUrl = '';
+    public static $baseUrl = '';
     public static $frameworkPath = '';
     public static $database = '';
     public static $autoload = true;
+    public $layout = 'main';
 
     /**
      * 初始化
@@ -22,10 +26,22 @@ class Core
         //框架路径
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
+
+        //当前域名
+        if(empty(self::$hostInfo))
+            self::$hostInfo = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
         
-        //url除去index.php之前的以及index.php
+        //除域名外以及index.php
         if(empty(self::$pathInfo))
-            self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '';
+            self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '/site/index';
+
+        //除域名外的地址
+        if(empty(self::$homeUrl))
+            self::$homeUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower($_SERVER['SCRIPT_NAME']) : '';
+
+        //除域名外的根目录地址
+        if(empty(self::$baseUrl))
+            self::$baseUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
 
         //数据库连接
         if(empty(self::$database)){
@@ -59,20 +75,36 @@ class Core
     {
         $parameter = array();
         $parameter['projectPath'] = self::$projectPath;
-        $parameter['frameworkPath'] = self::$frameworkPath;
+        $parameter['hostInfo'] = self::$hostInfo;
         $parameter['pathInfo'] = self::$pathInfo;
+        $parameter['homeUrl'] = self::$homeUrl;
+        $parameter['baseUrl'] = self::$baseUrl;
         $parameter['database'] = self::$database;
         return (object) $parameter;
     }
 
     /**
      * 加载模版
+     * 
+     * @param string $filename      文件名
+     * @param array  $variables     数据
+     *
      */
-    public function render($filename, $data)
+    public function render($filename, $variables)
     {
         $classname = get_class($this);
         $folder = strtolower(str_replace('Controller', '', $classname));
-        require self::$projectPath.'views/'.$folder.'/'.$filename.'.php'; 
+        //数组变量转换
+        extract($variables, EXTR_SKIP);
+        ob_start();
+        require self::$projectPath.'views/'.$folder.'/'.$filename.'.php';
+        $content = ob_get_contents();
+        ob_end_clean();
+        if($this->layout === 'main'){
+            require self::$projectPath.'views/layout/main.php'; 
+        }else{
+            require self::$projectPath.'views/layout/'.$this->layout.'.php';
+        }
     }
 
     /**
@@ -89,7 +121,7 @@ class Core
     /**
      * 框架内加载文件
      *
-     * @param string file 文件名
+     * @param string $file 文件名
      *
      */
     public function requireFrameworkFile($file=null)
@@ -104,7 +136,7 @@ class Core
     /**
      * 项目内加载文件
      *
-     * @param string file 文件名
+     * @param string $file 文件名
      *
      */
     public function requireProjectFile($file=null)
@@ -124,7 +156,7 @@ class Core
      * @return string
      *
      */
-    public function Verifycode($num)
+    public function verifyCode($num)
     {
         $this->requireFrameworkFile('Library/Verifycode.class');
 

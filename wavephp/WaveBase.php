@@ -11,16 +11,22 @@ class WaveBase
      */
     public static function loader($classname) 
     {
-        $filename = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/').'/models/'.$classname.".php";
-        if(file_exists($filename)){
-            require $filename;
-            if(class_exists($classname)){
+        $path = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
+        require $path.'/config/main.php';
+        $import = $config['import'];
+        foreach ($import as $key => $value) {
+            $filename = $path.str_replace('.*', '', $value).'/'.$classname.'.php';
+            if(file_exists($filename)){
+                require $filename;
+                if(class_exists($classname)){
 
+                }else{
+                    exit('没有'.$classname.'这个类！');
+                }
+                break;
             }else{
-                exit('没有'.$classname.'这个类！');
+                exit('没有'.$classname.'.php这个文件！');
             }
-        }else{
-            exit('没有'.$classname.'.php这个文件！');
         }
     }
     

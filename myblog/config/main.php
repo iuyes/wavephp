@@ -1,5 +1,9 @@
 <?php
 $config = array(
+    'import'=>array(
+        'models.*',
+        'zabbix.*'
+    ),
     'database'=>array(
         'db'=>array(
             'dbhost'=>'localhost',

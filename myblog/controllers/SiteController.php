@@ -16,13 +16,25 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $arr = $this->app()->database->db->getOne("select user from user");
-        echo "<pre>";
+        // echo "<pre>";
         print_r($arr);
+
+        echo "<br>";
 
         $arr2 = $this->app()->database->db2->getOne("select * from joke_user");
         print_r($arr2);
 
+        echo "<br>";
+
         echo $this->app()->projectPath."<br>";
+
+        echo $this->app()->hostInfo."<br>";
+
+        echo $this->app()->pathInfo."<br>";
+
+        echo $this->app()->homeUrl."<br>";
+
+        echo $this->app()->baseUrl."<br>";
         
         echo "hello world!<br>";
 
@@ -32,12 +44,13 @@ class SiteController extends Controller
 
         echo "User model 加载成功！<br>";
 
+        // $this->layout='index';
         $this->render('index', array('username'=>'许萍'));
 
         // echo "<pre>";
         // print_r(get_included_files());
 
-        // echo $this->Verifycode(4);
+        // echo $this->verifyCode(4);
 
     }
     
