@@ -131,7 +131,7 @@ class Core
      * @return string
      *
      */
-    public function verifyCode($num, $width = 130, $height = 50)
+    public function verifyCode($num = 4, $width = 130, $height = 50)
     {
         $this->requireFrameworkFile('Library/VerifyCode.class');
         $VerifyCode = new VerifyCode(self::$frameworkPath);      //实例化一个对象
