@@ -49,10 +49,17 @@ class SiteController extends Controller
         // echo "<pre>";
         // print_r(get_included_files());
 
-        echo $this->verifyCode(4);
+    }
 
+    /**
+     * 验证码
+     */
+    public function actionVerifyCode()
+    {
+        echo $this->verifyCode(5);
     }
     
+
 
 }
 

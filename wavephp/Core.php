@@ -4,12 +4,12 @@
  */
 class Core
 {
-    public static $projectPath = '';
-    public static $hostInfo = '';
-    public static $pathInfo = '';
-    public static $homeUrl = '';
-    public static $baseUrl = '';
-    public static $frameworkPath = '';
+    public static $projectPath = '';        //项目路径
+    public static $hostInfo = '';           //当前域名
+    public static $pathInfo = '';           //除域名外以及index.php
+    public static $homeUrl = '';            //除域名外的地址
+    public static $baseUrl = '';            //除域名外的根目录地址
+    public static $frameworkPath = '';      //框架路径
     public static $database = '';
     public $layout = 'main';
 
@@ -18,27 +18,21 @@ class Core
      */
     public function __construct()
     {
-        //项目路径
         if(empty(self::$projectPath)) 
             self::$projectPath = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
         
-        //框架路径
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
 
-        //当前域名
         if(empty(self::$hostInfo))
             self::$hostInfo = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
         
-        //除域名外以及index.php
         if(empty(self::$pathInfo))
             self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '/site/index';
 
-        //除域名外的地址
         if(empty(self::$homeUrl))
             self::$homeUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower($_SERVER['SCRIPT_NAME']) : '';
 
-        //除域名外的根目录地址
         if(empty(self::$baseUrl))
             self::$baseUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
 
@@ -100,7 +94,7 @@ class Core
     /**
      * 框架内加载文件
      *
-     * @param string $file 文件名
+     * @param string $file      文件名
      *
      */
     public function requireFrameworkFile($file=null)
@@ -115,7 +109,7 @@ class Core
     /**
      * 项目内加载文件
      *
-     * @param string $file 文件名
+     * @param string $file      文件名
      *
      */
     public function requireProjectFile($file=null)
@@ -130,17 +124,22 @@ class Core
     /**
      * 验证码
      *
-     * @param int $num 验证码个数
+     * @param int $num          验证码个数
+     * @param int $width        验证码宽度
+     * @param int $height       验证码高度
      * 
      * @return string
      *
      */
-    public function verifyCode($num)
+    public function verifyCode($num, $width = 130, $height = 50)
     {
-        $this->requireFrameworkFile('Library/Verifycode.class');
-
-        return '123456';
-
+        $this->requireFrameworkFile('Library/VerifyCode.class');
+        $VerifyCode = new VerifyCode(self::$frameworkPath);      //实例化一个对象
+        $VerifyCode->codelen = $num;
+        $VerifyCode->width = $width;
+        $VerifyCode->height = $height;
+        $VerifyCode->doimg();  
+        // $_SESSION['verifycode'] = $VerifyCode->getCode();
     }
 
 }
