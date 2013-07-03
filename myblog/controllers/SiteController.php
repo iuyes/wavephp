@@ -15,26 +15,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $arr = $this->app()->database->db->getOne("select user from user");
-        // echo "<pre>";
+        $arr = Wave::app()->database->db->getOne("select user from user");
         print_r($arr);
 
         echo "<br>";
 
-        $arr2 = $this->app()->database->db2->getOne("select * from joke_user");
+        $arr2 = Wave::app()->database->db2->getOne("select * from joke_user");
         print_r($arr2);
 
         echo "<br>";
 
-        echo $this->app()->projectPath."<br>";
+        echo Wave::app()->projectPath."<br>";
 
-        echo $this->app()->hostInfo."<br>";
+        echo Wave::app()->hostInfo."<br>";
 
-        echo $this->app()->pathInfo."<br>";
+        echo Wave::app()->pathInfo."<br>";
 
-        echo $this->app()->homeUrl."<br>";
+        echo Wave::app()->homeUrl."<br>";
 
-        echo $this->app()->baseUrl."<br>";
+        echo Wave::app()->baseUrl."<br>";
         
         echo "hello world!<br>";
 
@@ -50,7 +49,7 @@ class SiteController extends Controller
         // echo "<pre>";
         // print_r(get_included_files());
 
-        // echo $this->verifyCode(4);
+        echo $this->verifyCode(4);
 
     }
     

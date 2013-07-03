@@ -38,6 +38,26 @@ class Wave extends Core
         }
         $this->clear();
     }
+
+    /**
+     * 一些公共参数，供项目调用的
+     *
+     * 例如在项目中输出除域名外的根目录地址 Wave::app()->homeUrl;
+     *
+     * @return object array
+     *
+     */
+    public static function app()
+    {
+        $parameter = array();
+        $parameter['projectPath'] = parent::$projectPath;
+        $parameter['hostInfo'] = self::$hostInfo;
+        $parameter['pathInfo'] = self::$pathInfo;
+        $parameter['homeUrl'] = self::$homeUrl;
+        $parameter['baseUrl'] = self::$baseUrl;
+        $parameter['database'] = self::$database;
+        return (object) $parameter;
+    }
     
 }
 

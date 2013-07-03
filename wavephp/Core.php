@@ -11,7 +11,6 @@ class Core
     public static $baseUrl = '';
     public static $frameworkPath = '';
     public static $database = '';
-    public static $autoload = true;
     public $layout = 'main';
 
     /**
@@ -61,26 +60,6 @@ class Core
                 }
             }
         }
-    }
-
-    /**
-     * 一些公共参数，供项目调用的
-     *
-     * 例如在项目中使用数据库 $this->app()->database->db->getOne("select * from user");
-     *
-     * @return object array
-     *
-     */
-    public function app()
-    {
-        $parameter = array();
-        $parameter['projectPath'] = self::$projectPath;
-        $parameter['hostInfo'] = self::$hostInfo;
-        $parameter['pathInfo'] = self::$pathInfo;
-        $parameter['homeUrl'] = self::$homeUrl;
-        $parameter['baseUrl'] = self::$baseUrl;
-        $parameter['database'] = self::$database;
-        return (object) $parameter;
     }
 
     /**
