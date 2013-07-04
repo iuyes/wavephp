@@ -49,15 +49,23 @@ class Wave extends Core
      */
     public static function app()
     {
-        $parameter = array();
+        $parameter = $request = array();
         $parameter['projectPath'] = parent::$projectPath;
-        $parameter['hostInfo'] = self::$hostInfo;
-        $parameter['pathInfo'] = self::$pathInfo;
-        $parameter['homeUrl'] = self::$homeUrl;
-        $parameter['baseUrl'] = self::$baseUrl;
-        $parameter['database'] = self::$database;
+        $parameter['homeUrl'] = parent::$homeUrl;
+        $parameter['database'] = parent::$database;
+
+        $request['hostInfo'] = parent::$hostInfo;
+        $request['pathInfo'] = parent::$pathInfo;
+        $request['baseUrl'] = parent::$baseUrl;
+        $parameter['request'] = (object) $request;
+        unset($request);
+
+        $parameter['user'] = parent::$session;
+
         return (object) $parameter;
     }
+
+
     
 }
 

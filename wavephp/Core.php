@@ -11,6 +11,7 @@ class Core
     public static $baseUrl = '';            //除域名外的根目录地址
     public static $frameworkPath = '';      //框架路径
     public static $database = '';
+    public static $session = '';
     public $layout = 'main';
 
     /**
@@ -36,14 +37,22 @@ class Core
         if(empty(self::$baseUrl))
             self::$baseUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
 
-        //数据库连接
+        $this->loadDatabase();
+        $this->loadSession();
+    }
+
+    /**
+     * 数据库连接
+     */
+    private function loadDatabase()
+    {
         if(empty(self::$database)){
             $config = self::$projectPath.'config/main.php';
             if(file_exists($config)){
                 require $config;
                 if(isset($config['database'])){
                     if(!empty($config['database'])){
-                        include_once self::$frameworkPath.'Db/Mysql.class.php';
+                        require self::$frameworkPath.'Db/Mysql.class.php';
                         $ndb = array();
                         foreach ($config['database'] as $key => $value) {
                             $ndb[$key] = new Mysql($value);
@@ -53,6 +62,26 @@ class Core
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * SEESION
+     */
+    private function loadSession()
+    {
+        if(empty(self::$session)){
+            $config = self::$projectPath.'config/main.php';
+            $lifeTime = 3600;
+            if(file_exists($config)){
+                require $config;
+                if(isset($config['session'])){
+                    if(!empty($config['session']['timeout']))
+                        $lifeTime = $config['session']['timeout'];
+                }
+            }
+            require self::$frameworkPath.'Web/Session.class.php';
+            self::$session = new Session($lifeTime);
         }
     }
 
@@ -89,6 +118,7 @@ class Core
         self::$frameworkPath = '';
         self::$pathInfo = '';
         self::$database = '';
+        self::$session = '';
     }
 
     /**
@@ -138,8 +168,8 @@ class Core
         $VerifyCode->codelen = $num;
         $VerifyCode->width = $width;
         $VerifyCode->height = $height;
-        $VerifyCode->doimg();  
-        // $_SESSION['verifycode'] = $VerifyCode->getCode();
+        $VerifyCode->doimg();
+        self::$session->setState('verifycode', $VerifyCode->getCode());
     }
 
 }

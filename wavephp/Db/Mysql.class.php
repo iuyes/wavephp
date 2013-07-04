@@ -18,8 +18,8 @@ class Mysql
     var $res;               //sql语句执行结果
     var $errno;             //错误信息
      
-     public function __construct($dbConfig)
-     {
+    public function __construct($dbConfig)
+    {
         $this->dbhost = $dbConfig['dbhost'];
         $this->dbuser = $dbConfig['dbuser'];
         $this->dbpasswd = $dbConfig['dbpasswd'];
@@ -34,7 +34,7 @@ class Mysql
         mysql_query('set names '.$this->dbchart, $this->dblink);
         mysql_select_db($this->dbname, $this->dblink);
         unset($dbConfig);
-     }
+    }
  
     /**
      * 数据库执行语句

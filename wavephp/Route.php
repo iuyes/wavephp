@@ -51,7 +51,6 @@ class Route extends Core
             $c = 'SiteController';
             $f = 'actionIndex';
         }
-
         $controller = parent::$projectPath.'controllers/'.$c.'.php';
         if(file_exists($controller)){
             $this->requireProjectFile('controllers/'.$c);
@@ -72,7 +71,6 @@ class Route extends Core
         }else{
             $this->error404();
         }
-        
     }
 
     /**
