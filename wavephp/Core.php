@@ -20,22 +20,31 @@ class Core
     public function __construct()
     {
         if(empty(self::$projectPath)) 
-            self::$projectPath = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
+            self::$projectPath = 
+            $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
         
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
 
         if(empty(self::$hostInfo))
-            self::$hostInfo = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+            self::$hostInfo = 
+            isset($_SERVER['HTTP_HOST']) 
+            ? strtolower($_SERVER['HTTP_HOST']) : '';
         
         if(empty(self::$pathInfo))
-            self::$pathInfo = isset($_SERVER['PATH_INFO']) ? strtolower($_SERVER['PATH_INFO']) : '/site/index';
+            self::$pathInfo = 
+            isset($_SERVER['PATH_INFO']) 
+            ? strtolower($_SERVER['PATH_INFO']) : '/site/index';
 
         if(empty(self::$homeUrl))
-            self::$homeUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower($_SERVER['SCRIPT_NAME']) : '';
+            self::$homeUrl = 
+            isset($_SERVER['SCRIPT_NAME']) 
+            ? strtolower($_SERVER['SCRIPT_NAME']) : '';
 
         if(empty(self::$baseUrl))
-            self::$baseUrl = isset($_SERVER['SCRIPT_NAME']) ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
+            self::$baseUrl = 
+            isset($_SERVER['SCRIPT_NAME']) 
+            ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
 
         $this->loadDatabase();
         $this->loadSession();
