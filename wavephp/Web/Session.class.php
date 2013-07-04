@@ -19,10 +19,14 @@ class Session
      * @param string $val   session值
      *
      */
-    public function setState($key, $val)
+    public function setState($key, $val, $timeout = null)
     {
-        session_set_cookie_params($this->lifeTime);
-        session_start();  
+        session_start();
+        if(!empty($timeout))
+            $_SESSION[$key.'_timeout'] = time()+$timeout;
+        else
+            $_SESSION[$key.'_timeout'] = time()+$this->lifeTime;
+  
         $_SESSION[$key] = $val;
     }
 
@@ -37,7 +41,18 @@ class Session
     public function getState($key)
     {
         session_start();
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : '';
+        if(isset($_SESSION[$key])){
+            if(time() > $_SESSION[$key.'_timeout']){
+                unset($_SESSION[$key.'_timeout']);
+                unset($_SESSION[$key]);
+                $txt = '';
+            }
+            else
+                $txt = $_SESSION[$key];
+        }else{
+            $txt = '';
+        }
+        return $txt;
     }
 
     /**
@@ -47,6 +62,7 @@ class Session
     {
         session_start();
         foreach ($_SESSION as $key => $value) {
+            unset($_SESSION[$key.'_timeout']);
             unset($_SESSION[$key]);
         }
         session_destroy();

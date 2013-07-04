@@ -178,7 +178,7 @@ class Core
         $VerifyCode->width = $width;
         $VerifyCode->height = $height;
         $VerifyCode->doimg();
-        self::$session->setState('verifycode', $VerifyCode->getCode());
+        self::$session->setState('verifycode', $VerifyCode->getCode(), 30);
     }
 
 }
