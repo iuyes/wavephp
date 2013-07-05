@@ -111,11 +111,7 @@ class Core
         require self::$projectPath.'views/'.$folder.'/'.$filename.'.php';
         $content = ob_get_contents();
         ob_end_clean();
-        if($this->layout === 'main'){
-            require self::$projectPath.'views/layout/main.php'; 
-        }else{
-            require self::$projectPath.'views/layout/'.$this->layout.'.php';
-        }
+        require self::$projectPath.'views/layout/'.$this->layout.'.php';
     }
 
     /**
