@@ -29,7 +29,7 @@ class Core
     public static $frameworkPath = '';      //框架路径
     public static $config = '';             //配置项目
     public static $database = '';           //数据库连接对象
-    public static $memcache = '';           //memcache缓存对象
+    public static $memcache = '';           //memcache 缓存对象
     public static $session = '';            //SESSION 对象
     public $layout = 'main';
 
