@@ -37,7 +37,7 @@ class Mysql
     public function __construct($dbConfig)
     {
         $this->dbhost       = $dbConfig['dbhost'];
-        $this->dbport       = $dbConfig['dbport'];
+        $this->dbport       = isset($dbConfig['dbport']) ? $dbConfig['dbport'] : 3306;
         $this->dbuser       = $dbConfig['dbuser'];
         $this->dbpasswd     = $dbConfig['dbpasswd'];
         $this->dbpconnect   = $dbConfig['dbpconnect'];

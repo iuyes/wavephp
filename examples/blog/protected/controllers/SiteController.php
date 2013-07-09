@@ -47,16 +47,6 @@ class SiteController extends Controller
         // $this->layout='index';
         $this->render('index', array('username'=>$username));
 
-        $tmp_object = new stdClass;
-        $tmp_object->str_attr = 'test';
-        $tmp_object->int_attr = 123;
-        Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30) or die ("Failed to save data at the server");
-        echo "Store data in the cache (data will expire in 30 seconds)<br/>\n";
-        $get_result = Wave::app()->memcache->cache1->get('key');
-        echo "Data from the cache:<br/>\n";
-        echo "<pre>";
-        print_r($get_result);
-
         // echo "<pre>";
         // print_r(get_included_files());
 
