@@ -37,6 +37,7 @@ helloworld
 
 3、入口 index.php
 内容：
+<pre>
     <?php
         header('Content-Type:text/html;charset=utf-8');
         // error_reporting(0);
@@ -46,9 +47,11 @@ helloworld
         $wave = new Wave();
         $wave->run();
     ?>
+</pre>
 
 4、配置文件
     config/main.php
+<pre>
     <?php
         $config = array(
             'import'=>array(
@@ -83,9 +86,10 @@ helloworld
             )
         );
     ?>
-
+</pre>
 5、默认控制层文件controllers/SiteController.php
 调用默认方法actionIndex
+<pre>
 <?php
 /**
  * 网站默认入口控制层
@@ -153,7 +157,7 @@ class SiteController extends Controller
     }
 }
 ?>
-
+</pre>
 6、解析URL 比如说我 要调用 类似这样的URL /blog/index.php/site/index
 index.php 可以通过rewrite去掉，这里就不讲了。
 site指SiteController.php，index指actionIndex
