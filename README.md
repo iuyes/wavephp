@@ -5,6 +5,7 @@ wavephp
 
 
 1、框架目录结构
+<pre>
 wavephp
     | Db
         Mysql.class.php
@@ -19,9 +20,11 @@ wavephp
     Route.php
     Wave.php
     WaveBase.php
+</pre>
 虽然框架的文件少，代码少，新功能可以加嘛，很好加的，就这几个文件。
 
 2、项目目录结构
+<pre>
 helloworld
     | config
         main.php
@@ -34,6 +37,7 @@ helloworld
         | site
             index.php
     index.php
+</pre>
 
 3、入口 index.php
 内容：
@@ -150,11 +154,13 @@ class SiteController extends Controller
     }
 }
 </pre>
+
 6、解析URL 比如说我 要调用 类似这样的URL /blog/index.php/site/index
-index.php 可以通过rewrite去掉，这里就不讲了。
-site指SiteController.php，index指actionIndex
-如果是这样的/blog/index.php/site/index/aaa/bbb 那应该写成public function actionIndex($a, $b)
-$a 就是 aaa， $b 就是 bbb
+<br>
+index.php 可以通过rewrite去掉，这里就不讲了。<br>
+site指SiteController.php，index指actionIndex<br>
+如果是这样的/blog/index.php/site/index/aaa/bbb 那应该写成public function actionIndex($a, $b)<br>
+$a 就是 aaa， $b 就是 bbb<br>
 
 7、数据库 仅支持mysql数据库
 <pre>
@@ -175,10 +181,11 @@ session 怎么用？
 获得：Wave::app()->user->getState('username');
 <br>
 9、验证码
-输出验证码 echo $this->verifyCode(4);
+输出验证码 echo $this->verifyCode(4);<br>
 获得session的验证码，5分钟。 Wave::app()->user->getState('verifycode');
 
 10、memcache
+<br>
 配置文件
 <pre>
 'memcache'=>array(
@@ -188,9 +195,9 @@ session 怎么用？
     )
 )
 </pre>
-可以多个
-调用的时候 
-存储：Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30)
+可以多个<br>
+调用的时候 <br>
+存储：Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30)<br>
 获得：Wave::app()->memcache->cache1->get('key')
 
 
