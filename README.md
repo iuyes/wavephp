@@ -140,7 +140,8 @@ class SiteController extends Controller
         $tmp_object = new stdClass;
         $tmp_object->str_attr = 'test';
         $tmp_object->int_attr = 123;
-        Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30) or die ("Failed to save data at the server");
+        Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30) 
+        or die ("Failed to save data at the server");
         echo "Store data in the cache (data will expire in 30 seconds)";
         $get_result = Wave::app()->memcache->cache1->get('key');
         echo "Data from the cache:";
@@ -156,6 +157,7 @@ site指SiteController.php，index指actionIndex
 $a 就是 aaa， $b 就是 bbb
 
 7、数据库 仅支持mysql数据库
+<pre>
     getOne($sql)    获得单条数据
     getAll($sql)    获得多条数据
     insertdb($table, $array)    插入数据
@@ -163,23 +165,29 @@ $a 就是 aaa， $b 就是 bbb
     updatedb($table, $array, $where_field, $where_value, 'IN')  更新数据 IN
     getInsertID()   获得刚插入的ID
     query($sql)     执行语句
+</pre>
 
 8、session
 session 怎么用？
+<br>
 存储：Wave::app()->user->setState('username', 'Ellen Xu');
+<br>
 获得：Wave::app()->user->getState('username');
-
+<br>
 9、验证码
 输出验证码 echo $this->verifyCode(4);
 获得session的验证码，5分钟。 Wave::app()->user->getState('verifycode');
 
 10、memcache
-配置文件    'memcache'=>array(
-                'cache1' => array(
-                    'host'              => 'localhost',
-                    'port'              => '11211'
-                )
-            )
+配置文件
+<pre>
+'memcache'=>array(
+    'cache1' => array(
+        'host'              => 'localhost',
+        'port'              => '11211'
+    )
+)
+</pre>
 可以多个
 调用的时候 
 存储：Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30)
