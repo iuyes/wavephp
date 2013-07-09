@@ -1,12 +1,12 @@
 <?php
 $config = array(
     'import'=>array(
-        'models.*',
-        'zabbix.*'
+        'models.*'
     ),
     'database'=>array(
         'db'=>array(
             'dbhost'        => 'localhost',
+            'dbport'        => '3306',
             'dbuser'        => 'root',
             'dbpasswd'      => '',
             'dbname'        => 'wordpress',
@@ -15,6 +15,7 @@ $config = array(
         ),
         'db2'=>array(
             'dbhost'        => 'localhost',
+            'dbport'        => '3306',
             'dbuser'        => 'root',
             'dbpasswd'      => '',
             'dbname'        => 'joke',

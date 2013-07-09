@@ -1,6 +1,24 @@
 <?php
 /**
+ * PHP 5.0 以上
+ * 
+ * @package         Wavephp
+ * @author          许萍
+ * @copyright       Copyright (c) 2013
+ * @link            https://github.com/xpmozong/wavephp
+ * @since           Version 1.0
+ *
+ */
+
+/**
+ * Wavephp Application VerifyCode Class
+ *
  * 验证码类
+ *
+ * @package         Wavephp
+ * @subpackage      Library
+ * @author          许萍
+ *
  */
 class VerifyCode
 {

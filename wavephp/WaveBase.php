@@ -1,4 +1,24 @@
 <?php
+/**
+ * PHP 5.0 以上
+ * 
+ * @package         Wavephp
+ * @author          许萍
+ * @copyright       Copyright (c) 2013
+ * @link            https://github.com/xpmozong/wavephp
+ * @since           Version 1.0
+ *
+ */
+
+/**
+ * Wavephp Application WaveBase Class
+ *
+ * 基础类
+ *
+ * @package         Wavephp
+ * @author          许萍
+ *
+ */
 class WaveBase
 {
     /**

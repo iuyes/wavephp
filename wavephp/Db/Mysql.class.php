@@ -1,35 +1,54 @@
 <?php
-/*
- * 定义一个连接类,可以访问建立多个数据库连接对象
+/**
+ * PHP 5.0 以上
+ * 
+ * @package         Wavephp
+ * @author          许萍
+ * @copyright       Copyright (c) 2013
+ * @link            https://github.com/xpmozong/wavephp
+ * @since           Version 1.0
  *
- * author 寞踪 http://weibo.com/xpmozong
+ */
+
+/**
+ * Wavephp Application Mysql Class
+ *
+ * 数据库类
+ *
+ * @package         Wavephp
+ * @subpackage      Db
+ * @author          许萍
  *
  */
 class Mysql
 {
-    var $dbhost;            //数据库地址
-    var $dbuser;            //数据库用户名
-    var $dbpasswd;          //数据库密码
-    var $dbpconnect=0;      //数据库长连接
-    var $dbname;            //数据库名称
-    var $dbchart;           //数据库链接编码
-    var $dblink;            //数据库连接对象
-    var $sql;               //sql语句
-    var $res;               //sql语句执行结果
-    var $errno;             //错误信息
+    private $dbhost;            //数据库地址
+    private $dbport;            //数据库端口
+    private $dbuser;            //数据库用户名
+    private $dbpasswd;          //数据库密码
+    private $dbpconnect=0;      //数据库长连接
+    private $dbname;            //数据库名称
+    private $dbchart;           //数据库链接编码
+    private $dblink;            //数据库连接对象
+    private $sql;               //sql语句
+    private $res;               //sql语句执行结果
+    private $errno;             //错误信息
      
     public function __construct($dbConfig)
     {
         $this->dbhost = $dbConfig['dbhost'];
+        $this->dbport = $dbConfig['dbport'];
         $this->dbuser = $dbConfig['dbuser'];
         $this->dbpasswd = $dbConfig['dbpasswd'];
         $this->dbpconnect = $dbConfig['dbpconnect'];
         $this->dbname = $dbConfig['dbname'];
         $this->dbchart = $dbConfig['dbchart'];
         if($this->dbpconnect) {
-            $this->dblink = mysql_pconnect($this->dbhost,$this->dbuser,$this->dbpasswd,1) or die('can not connect to mysql database!');
+            $this->dblink = mysql_pconnect($this->dbhost.':'.$this->dbport,$this->dbuser,$this->dbpasswd,1) 
+            or die('can not connect to mysql database!');
         } else {
-            $this->dblink = mysql_connect($this->dbhost,$this->dbuser,$this->dbpasswd,1) or die('can not connect to mysql database!');
+            $this->dblink = mysql_connect($this->dbhost.':'.$this->dbport,$this->dbuser,$this->dbpasswd,1) 
+            or die('can not connect to mysql database!');
         }
         mysql_query('set names '.$this->dbchart, $this->dblink);
         mysql_select_db($this->dbname, $this->dblink);
@@ -109,9 +128,9 @@ class Mysql
         $update = implode(",",$update);
         
         if ($type == 'IN'){
-            $sql = "UPDATE `" . $table . "` SET " . $update . ' WHERE ' . $where_field . ' ' . $type . " " . $where_value;
+            $sql = 'UPDATE `'.$table.'` SET '.$update.' WHERE '.$where_field.' IN ('.$where_value.')';
         }else{
-            $sql = "UPDATE `" . $table . "` SET " . $update . ' WHERE ' . $where_field . ' ' . $type . " '" . $where_value . "'";
+            $sql = 'UPDATE `'.$table.'` SET '.$update.' WHERE '.$where_field.' = '." '".$where_value."'";
         }
         if($this->query($sql)) {
             return true;

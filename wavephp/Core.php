@@ -1,6 +1,23 @@
 <?php
 /**
+ * PHP 5.0 以上
+ * 
+ * @package         Wavephp
+ * @author          许萍
+ * @copyright       Copyright (c) 2013
+ * @link            https://github.com/xpmozong/wavephp
+ * @since           Version 1.0
+ *
+ */
+
+/**
+ * Wavephp Application Core Class
+ *
  * 核心类
+ *
+ * @package         Wavephp
+ * @author          许萍
+ *
  */
 class Core
 {
@@ -10,8 +27,8 @@ class Core
     public static $homeUrl = '';            //除域名外的地址
     public static $baseUrl = '';            //除域名外的根目录地址
     public static $frameworkPath = '';      //框架路径
-    public static $database = '';
-    public static $session = '';
+    public static $database = '';           //数据库连接
+    public static $session = '';            //SESSION 对象
     public $layout = 'main';
 
     /**
