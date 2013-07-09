@@ -180,6 +180,7 @@ session 怎么用？
 <br>
 获得：Wave::app()->user->getState('username');
 <br>
+
 9、验证码
 输出验证码 echo $this->verifyCode(4);<br>
 获得session的验证码，5分钟。 Wave::app()->user->getState('verifycode');
