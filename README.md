@@ -26,16 +26,17 @@ wavephp
 2、项目目录结构
 <pre>
 helloworld
-    | config
-        main.php
-    | controllers
-        SiteController.php
-    | models
-    | views
-        | layout
+    | protected
+        | config
             main.php
-        | site
-            index.php
+        | controllers
+            SiteController.php
+        | models
+        | views
+            | layout
+                main.php
+            | site
+                index.php
     index.php
 </pre>
 
@@ -45,9 +46,10 @@ helloworld
     header('Content-Type:text/html;charset=utf-8');
     // error_reporting(0);
 
-    require '../wavephp/Wave.php';
+    require dirname(__FILE__).'/../../wavephp/Wave.php';
+    $config = dirname(__FILE__).'/protected/config/main.php';
 
-    $wave = new Wave();
+    $wave = new Wave($config);
     $wave->run();
 </pre>
 
@@ -55,9 +57,15 @@ helloworld
     config/main.php
 <pre>
     $config = array(
+        'projectName'=>'protected',
+        'modelName'=>'protected',
+
         'import'=>array(
             'models.*'
         ),
+
+        'defaultController'=>'site',
+        
         'database'=>array(
             'db'=>array(
                 'dbhost'        => 'localhost',

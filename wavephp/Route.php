@@ -19,14 +19,25 @@
  * @author          许萍
  *
  */
-class Route extends Core
+class Route
 {
+    private $projectPath        = '';   //项目路径
+    private $projectName        = '';   //项目名称
+    private $defaultControl     = '';   //默认控制层
+
+    private $Core = '';                 //核心类
+
     /**
      * 初始化
      */
-    function __construct()
+    function __construct($app, $Core)
     {
-        parent::__construct();
+        $this->projectPath      = $app->projectPath;
+        $this->projectName      = $app->projectName;
+        $this->pathInfo         = $app->request->pathInfo;
+        $this->defaultControl   = $app->defaultControl;
+
+        $this->Core = $Core;
     }
 
     /**
@@ -53,7 +64,7 @@ class Route extends Core
     public function route()
     {
         $callarray = array();
-        $rpathInfo = parent::$pathInfo;
+        $rpathInfo = $this->pathInfo;
         if(!empty($rpathInfo)){
             $rpathInfo = $this->filterStr($rpathInfo);
             $rpathInfo = ltrim($rpathInfo, '/');
@@ -66,12 +77,12 @@ class Route extends Core
                 $callarray = array_filter($pathInfoArr);
             }
         }else{
-            $c = 'SiteController';
+            $c = ucfirst($this->defaultControl).'Controller';
             $f = 'actionIndex';
         }
-        $controller = parent::$projectPath.'controllers/'.$c.'.php';
+        $controller = $this->projectPath.$this->projectName.'/controllers/'.$c.'.php';
         if(file_exists($controller)){
-            $this->requireProjectFile('controllers/'.$c);
+            $this->Core->requireProjectFile($this->projectName.'/controllers/'.$c);
             if(class_exists($c)){
                 $cc = new $c;
                 if(method_exists($cc, $f)){
@@ -96,8 +107,8 @@ class Route extends Core
      */
     public function error404()
     {
-        echo "<h2>Error 404</h2>";
-        echo 'Unable to resolve the request "'.parent::$pathInfo.'".';
+        echo '<h2>Error 404</h2>';
+        echo 'Unable to resolve the request "'.$this->pathInfo.'".';
     }
 
 }

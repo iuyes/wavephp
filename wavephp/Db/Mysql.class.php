@@ -26,7 +26,7 @@ class Mysql
     private $dbport;            //数据库端口
     private $dbuser;            //数据库用户名
     private $dbpasswd;          //数据库密码
-    private $dbpconnect=0;      //数据库长连接
+    private $dbpconnect = 0;    //数据库长连接
     private $dbname;            //数据库名称
     private $dbchart;           //数据库链接编码
     private $dblink;            //数据库连接对象
@@ -36,13 +36,13 @@ class Mysql
      
     public function __construct($dbConfig)
     {
-        $this->dbhost = $dbConfig['dbhost'];
-        $this->dbport = $dbConfig['dbport'];
-        $this->dbuser = $dbConfig['dbuser'];
-        $this->dbpasswd = $dbConfig['dbpasswd'];
-        $this->dbpconnect = $dbConfig['dbpconnect'];
-        $this->dbname = $dbConfig['dbname'];
-        $this->dbchart = $dbConfig['dbchart'];
+        $this->dbhost       = $dbConfig['dbhost'];
+        $this->dbport       = $dbConfig['dbport'];
+        $this->dbuser       = $dbConfig['dbuser'];
+        $this->dbpasswd     = $dbConfig['dbpasswd'];
+        $this->dbpconnect   = $dbConfig['dbpconnect'];
+        $this->dbname       = $dbConfig['dbname'];
+        $this->dbchart      = $dbConfig['dbchart'];
         if($this->dbpconnect) {
             $this->dblink = mysql_pconnect($this->dbhost.':'.$this->dbport,$this->dbuser,$this->dbpasswd,1) 
             or die('can not connect to mysql database!');

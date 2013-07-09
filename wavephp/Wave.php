@@ -1,5 +1,4 @@
 <?php
-require dirname(__FILE__).'/Core.php';
 /**
  * PHP 5.0 以上
  * 
@@ -20,14 +19,25 @@ require dirname(__FILE__).'/Core.php';
  * @author          许萍
  *
  */
-class Wave extends Core
+class Wave
 {
+    public $Core        = null;
+    public $Import      = null;
+    public $config      = null;
+    public static $app  = null;
+
     /**
      * 初始化
      */
-    public function __construct()
+    public function __construct($configfile = null)
     {  
-        parent::__construct();
+        require dirname(__FILE__).'/Core.php';
+        if(file_exists($configfile)) {
+            require $configfile;
+            $this->config = $config;
+        }
+        $this->Core = new Core($this->config);
+        self::$app = $this->Core->app();
     }
 
     /**
@@ -35,23 +45,23 @@ class Wave extends Core
      */
     public function run()
     {
-        $this->requireFrameworkFile('Route');
-        $this->requireFrameworkFile('Controller');
-        $this->requireFrameworkFile('WaveBase');
+        $this->Core->requireFrameworkFile('Route');
+        $this->Core->requireFrameworkFile('Controller');
+        $this->Core->requireFrameworkFile('WaveBase');
 
-        $Route = new Route();
+        $Route = new Route(self::$app, $this->Core);
 
         spl_autoload_register(array('WaveBase', 'loader'));
 
         $Route->route();
 
         //关闭数据库连接
-        if(!empty(parent::$database)) {
-            foreach (parent::$database as $key => $value) {
-                parent::$database->$key->close();
+        if(!empty(self::$app->database)) {
+            foreach (self::$app->database as $key => $value) {
+                self::$app->database->$key->close();
             }
         }
-        $this->clear();
+        $this->Core->clear();
     }
 
     /**
@@ -64,21 +74,7 @@ class Wave extends Core
      */
     public static function app()
     {
-        $parameter = $request = array();
-        $parameter['projectPath'] = parent::$projectPath;
-        $parameter['homeUrl'] = parent::$homeUrl;
-        $parameter['database'] = parent::$database;
-        $parameter['memcache'] = parent::$memcache;
-
-        $request['hostInfo'] = parent::$hostInfo;
-        $request['pathInfo'] = parent::$pathInfo;
-        $request['baseUrl'] = parent::$baseUrl;
-        $parameter['request'] = (object) $request;
-        unset($request);
-
-        $parameter['user'] = parent::$session;
-
-        return (object) $parameter;
+        return self::$app;
     }
 
 

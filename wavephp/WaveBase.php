@@ -31,25 +31,21 @@ class WaveBase
      */
     public static function loader($classname) 
     {
-        $path = $_SERVER['DOCUMENT_ROOT'].ltrim(str_replace('index.php', '', $_SERVER['SCRIPT_NAME']), '/');
-        $config = $path.'/config/main.php';
-        if(file_exists($config)){
-            require $config;
-            if(isset($config['import'])){
-                $import = $config['import'];
-                foreach ($import as $key => $value) {
-                    $filename = $path.str_replace('.*', '', $value).'/'.$classname.'.php';
-                    if(file_exists($filename)){
-                        require $filename;
-                        if(class_exists($classname)){
+        $app = Wave::app();
+        if(!empty($app->import)){
+            $import = $app->import;
+            foreach ($import as $key => $value) {
+                $filename = $app->projectPath.$app->modelName.'/'.str_replace('.*', '', $value).'/'.$classname.'.php';
+                if(file_exists($filename)){
+                    require $filename;
+                    if(class_exists($classname)){
 
-                        }else{
-                            exit('没有'.$classname.'这个类！');
-                        }
-                        break;
                     }else{
-                        exit('没有'.$classname.'.php这个文件！');
+                        exit('没有'.$classname.'这个类！');
                     }
+                    break;
+                }else{
+                    exit('没有'.$classname.'.php这个文件！');
                 }
             }
         }

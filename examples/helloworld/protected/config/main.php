@@ -1,8 +1,14 @@
 <?php
 $config = array(
+    'projectName'=>'protected',
+    'modelName'=>'protected',
+
     'import'=>array(
         'models.*'
     ),
+
+    'defaultController'=>'site',
+    
     'database'=>array(
         'db'=>array(
             'dbhost'        => 'localhost',
