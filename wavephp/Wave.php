@@ -37,7 +37,6 @@ class Wave extends Core
     {
         $this->requireFrameworkFile('Route');
         $this->requireFrameworkFile('Controller');
-        $this->requireFrameworkFile('Model');
         $this->requireFrameworkFile('WaveBase');
 
         $Route = new Route();
