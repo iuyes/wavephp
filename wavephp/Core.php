@@ -147,15 +147,18 @@ class Core
     private function loadSession()
     {
         if(empty(self::$session)){
-            $lifeTime = 3600;
+            $lifeTime   = 3600;
+            $prefix     = '';
             if(!empty(self::$config)){
                 if(isset(self::$config['session'])){
                     if(!empty(self::$config['session']['timeout']))
                         $lifeTime = self::$config['session']['timeout'];
+                    if(!empty(self::$config['session']['prefix']))
+                        $prefix = self::$config['session']['prefix'];
                 }
             }
             require self::$frameworkPath.'Web/Session.class.php';
-            self::$session = new Session($lifeTime);
+            self::$session = new Session($prefix, $lifeTime);
         }
     }
 

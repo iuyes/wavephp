@@ -22,10 +22,12 @@
  */
 class Session
 {
-    public $lifeTime = 86400;   //生存周期
-
-    public function __construct($timeout)
+    public $prefix      = '';       //session前缀
+    public $lifeTime    = 86400;    //生存周期
+    
+    public function __construct($pre, $timeout)
     {
+        $this->prefix = $pre.'_';
         $this->lifeTime = $timeout;
     }
 
@@ -40,11 +42,11 @@ class Session
     {
         session_start();
         if(!empty($timeout))
-            $_SESSION[$key.'_timeout'] = time()+$timeout;
+            $_SESSION[$this->prefix.$key.'_timeout'] = time()+$timeout;
         else
-            $_SESSION[$key.'_timeout'] = time()+$this->lifeTime;
+            $_SESSION[$this->prefix.$key.'_timeout'] = time()+$this->lifeTime;
   
-        $_SESSION[$key] = $val;
+        $_SESSION[$this->prefix.$key] = $val;
     }
 
     /**
@@ -58,14 +60,14 @@ class Session
     public function getState($key)
     {
         session_start();
-        if(isset($_SESSION[$key])){
-            if(time() > $_SESSION[$key.'_timeout']){
-                unset($_SESSION[$key.'_timeout']);
-                unset($_SESSION[$key]);
+        if(isset($_SESSION[$this->prefix.$key])){
+            if(time() > $_SESSION[$this->prefix.$key.'_timeout']){
+                unset($_SESSION[$this->prefix.$key.'_timeout']);
+                unset($_SESSION[$this->prefix.$key]);
                 $txt = '';
             }
             else
-                $txt = $_SESSION[$key];
+                $txt = $_SESSION[$this->prefix.$key];
         }else{
             $txt = '';
         }
@@ -79,8 +81,8 @@ class Session
     {
         session_start();
         foreach ($_SESSION as $key => $value) {
-            unset($_SESSION[$key.'_timeout']);
-            unset($_SESSION[$key]);
+            unset($_SESSION[$this->prefix.$key.'_timeout']);
+            unset($_SESSION[$this->prefix.$key]);
         }
         session_destroy();
     }

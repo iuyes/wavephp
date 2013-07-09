@@ -32,10 +32,10 @@ class Controller
      */
     public function __construct()
     {
-        $this->app = Wave::app();
-        $this->frameworkPath = $this->app->frameworkPath;
-        $this->projectPath = $this->app->projectPath;
-        $this->projectName = $this->app->projectName;
+        $this->app              = Wave::app();
+        $this->frameworkPath    = $this->app->frameworkPath;
+        $this->projectPath      = $this->app->projectPath;
+        $this->projectName      = $this->app->projectName;
     }
 
     /**
@@ -76,7 +76,7 @@ class Controller
         $VerifyCode->width = $width;
         $VerifyCode->height = $height;
         $VerifyCode->doimg();
-        $this->app->session->setState('verifycode', $VerifyCode->getCode(), 300);
+        $this->app->user->setState('verifycode', $VerifyCode->getCode(), 300);
     }
     
 }

@@ -19,14 +19,14 @@
  * @author          许萍
  *
  */
-class Model extends Core
+class Model
 {
     /**
      * 初始化
      */
     public function __construct()
     {
-        parent::__construct();
+        
     }
     
 }

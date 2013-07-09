@@ -30,6 +30,7 @@ $config = array(
         )
     ),
     'session'=>array(
+        'prefix'               => 'hw',
         'timeout'           => 86400
     ),
     'memcache'=>array(
