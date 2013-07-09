@@ -141,9 +141,9 @@ class SiteController extends Controller
         $tmp_object->str_attr = 'test';
         $tmp_object->int_attr = 123;
         Wave::app()->memcache->cache1->set('key', $tmp_object, false, 30) or die ("Failed to save data at the server");
-        echo "Store data in the cache (data will expire in 30 seconds)<br/>\n";
+        echo "Store data in the cache (data will expire in 30 seconds)";
         $get_result = Wave::app()->memcache->cache1->get('key');
-        echo "Data from the cache:<br/>\n";
+        echo "Data from the cache:";
         print_r($get_result);
 
     }
