@@ -25,6 +25,12 @@ $config = array(
     ),
     'session'=>array(
         'timeout'           => 86400
+    ),
+    'memcache'=>array(
+        'cache1' => array(
+            'host'              => 'localhost',
+            'port'              => '11211'
+        )
     )
 );
 ?>

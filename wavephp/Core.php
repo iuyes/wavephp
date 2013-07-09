@@ -27,7 +27,9 @@ class Core
     public static $homeUrl = '';            //除域名外的地址
     public static $baseUrl = '';            //除域名外的根目录地址
     public static $frameworkPath = '';      //框架路径
-    public static $database = '';           //数据库连接
+    public static $config = '';             //配置项目
+    public static $database = '';           //数据库连接对象
+    public static $memcache = '';           //memcache缓存对象
     public static $session = '';            //SESSION 对象
     public $layout = 'main';
 
@@ -63,7 +65,16 @@ class Core
             isset($_SERVER['SCRIPT_NAME']) 
             ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
 
+        if(empty(self::$config)){
+            $main = self::$projectPath.'config/main.php';
+            if(file_exists($main)){
+                require $main;
+                self::$config = $config;
+            }
+        }
+
         $this->loadDatabase();
+        $this->loadMemcache();
         $this->loadSession();
     }
 
@@ -73,18 +84,39 @@ class Core
     private function loadDatabase()
     {
         if(empty(self::$database)){
-            $config = self::$projectPath.'config/main.php';
-            if(file_exists($config)){
-                require $config;
-                if(isset($config['database'])){
-                    if(!empty($config['database'])){
+            if(!empty(self::$config)){
+                if(isset(self::$config['database'])){
+                    if(!empty(self::$config['database'])){
                         require self::$frameworkPath.'Db/Mysql.class.php';
                         $ndb = array();
-                        foreach ($config['database'] as $key => $value) {
+                        foreach (self::$config['database'] as $key => $value) {
                             $ndb[$key] = new Mysql($value);
                         }
                         self::$database = (object) $ndb;
                         unset($ndb);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * memcache 连接
+     */
+    private function loadMemcache()
+    {
+        if(empty(self::$memcache)){
+            if(!empty(self::$config)){
+                if(isset(self::$config['memcache'])){
+                    if(!empty(self::$config['memcache'])){
+                        $cache = array();
+                        foreach (self::$config['memcache'] as $key => $value) {
+                            $cache[$key] = new Memcache();
+                            $cache[$key]->connect($value['host'], $value['port']) 
+                            or die ("Could not connect ".$value['host']);
+                        }
+                        self::$memcache = (object) $cache;
+                        unset($cache);
                     }
                 }
             }
@@ -97,13 +129,11 @@ class Core
     private function loadSession()
     {
         if(empty(self::$session)){
-            $config = self::$projectPath.'config/main.php';
             $lifeTime = 3600;
-            if(file_exists($config)){
-                require $config;
-                if(isset($config['session'])){
-                    if(!empty($config['session']['timeout']))
-                        $lifeTime = $config['session']['timeout'];
+            if(!empty(self::$config)){
+                if(isset(self::$config['session'])){
+                    if(!empty(self::$config['session']['timeout']))
+                        $lifeTime = self::$config['session']['timeout'];
                 }
             }
             require self::$frameworkPath.'Web/Session.class.php';
@@ -137,9 +167,14 @@ class Core
     public function clear()
     {
         self::$projectPath = '';
-        self::$frameworkPath = '';
+        self::$hostInfo = '';
         self::$pathInfo = '';
+        self::$homeUrl = '';
+        self::$baseUrl = '';
+        self::$frameworkPath = '';
+        self::$config = '';
         self::$database = '';
+        self::$memcache = '';
         self::$session = '';
     }
 

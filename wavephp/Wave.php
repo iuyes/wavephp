@@ -69,6 +69,7 @@ class Wave extends Core
         $parameter['projectPath'] = parent::$projectPath;
         $parameter['homeUrl'] = parent::$homeUrl;
         $parameter['database'] = parent::$database;
+        $parameter['memcache'] = parent::$memcache;
 
         $request['hostInfo'] = parent::$hostInfo;
         $request['pathInfo'] = parent::$pathInfo;
