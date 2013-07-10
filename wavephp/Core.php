@@ -41,13 +41,13 @@ class Core
      */
     public function __construct($config = null)
     {
-        if(empty(self::$projectPath)){
-            $scriptArr = explode('/', $_SERVER['SCRIPT_NAME']);
-            array_pop($scriptArr);
-            $scriptName = implode('/', $scriptArr);
-            unset($scriptArr);
-            self::$projectPath = $_SERVER['DOCUMENT_ROOT'].$scriptName.'/';
-        }
+        $scriptArr = explode('/', $_SERVER['SCRIPT_NAME']);
+        array_pop($scriptArr);
+        $scriptName = implode('/', $scriptArr);
+        unset($scriptArr);
+
+        if(empty(self::$projectPath)) 
+            self::$projectPath = $_SERVER['DOCUMENT_ROOT'].ltrim($scriptName, '/').'/';
         
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
@@ -67,14 +67,10 @@ class Core
             isset($_SERVER['SCRIPT_NAME']) 
             ? strtolower($_SERVER['SCRIPT_NAME']) : '';
 
-        if(empty(self::$baseUrl))
-            self::$baseUrl = 
-            isset($_SERVER['SCRIPT_NAME']) 
-            ? strtolower(str_replace('index.php', '', $_SERVER['SCRIPT_NAME'])) : '';
+        if(empty(self::$baseUrl)) self::$baseUrl = $scriptName;
 
-        if(empty(self::$config)){
+        if(empty(self::$config))
             if(!empty($config)) self::$config = $config;
-        }
 
         if(empty(self::$projectName)){
             self::$projectName = !empty($config['projectName']) 
