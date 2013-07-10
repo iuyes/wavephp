@@ -45,7 +45,7 @@ class Controller
      * @param array  $variables     数据
      *
      */
-    public function render($filename, $variables)
+    public function render($filename, $variables = array())
     {
         $classname = get_class($this);
         $folder = strtolower(str_replace('Controller', '', $classname));
