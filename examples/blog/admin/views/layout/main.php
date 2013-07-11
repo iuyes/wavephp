@@ -5,6 +5,7 @@
 <title>博客</title>
 <?php $baseUrl=Wave::app()->request->baseUrl;?>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/pure-min.css"/>
+<link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/public.css"/>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/admin.css"/>
 <script type="text/javascript" src="<?=$baseUrl?>/resouce/js/jquery-1.4.3.min.js"></script>
 </head>

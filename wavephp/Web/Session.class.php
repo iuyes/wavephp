@@ -40,7 +40,8 @@ class Session
      */
     public function setState($key, $val, $timeout = null)
     {
-        session_start();
+        if(!isset($_SESSION)) session_start(); 
+
         if(!empty($timeout))
             $_SESSION[$this->prefix.$key.'_timeout'] = time()+$timeout;
         else
@@ -59,7 +60,8 @@ class Session
      */
     public function getState($key)
     {
-        session_start();
+        if(!isset($_SESSION)) session_start();
+
         if(isset($_SESSION[$this->prefix.$key])){
             if(time() > $_SESSION[$this->prefix.$key.'_timeout']){
                 unset($_SESSION[$this->prefix.$key.'_timeout']);
@@ -79,7 +81,8 @@ class Session
      */
     public function logout()
     {
-        session_start();
+        if(!isset($_SESSION)) session_start();
+        
         foreach ($_SESSION as $key => $value) {
             unset($_SESSION[$this->prefix.$key.'_timeout']);
             unset($_SESSION[$this->prefix.$key]);

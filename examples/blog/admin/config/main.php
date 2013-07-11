@@ -15,7 +15,7 @@ $config = array(
             'dbport'        => '3306',
             'dbuser'        => 'root',
             'dbpasswd'      => '',
-            'dbname'        => 'wordpress',
+            'dbname'        => 'wave_blog',
             'dbpconnect'    => 0,
             'dbchart'       => 'utf8'
         ),
@@ -30,6 +30,7 @@ $config = array(
         )
     ),
     'session'=>array(
+        'prefix'            => 'admin',
         'timeout'           => 86400
     ),
     'memcache'=>array(

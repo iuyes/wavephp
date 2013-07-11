@@ -15,7 +15,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $arr = Wave::app()->database->db->getOne("select user_login from wp_users");
+        $arr = Wave::app()->database->db->getOne("select user_login from users");
         print_r($arr);
 
         echo "<br>";
@@ -38,7 +38,7 @@ class SiteController extends Controller
         // spl_autoload_unregister(array('WaveBase','loader'));
         // spl_autoload_register(array('WaveBase','loader'));
 
-        $User = new User();
+        $Users = new Users();
 
         echo "User model 加载成功！<br>";
 
