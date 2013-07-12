@@ -85,6 +85,7 @@ helloworld
             )
         ),
         'session'=>array(
+            'pre'               => 'blog',
             'timeout'           => 86400
         ),
         'memcache'=>array(
