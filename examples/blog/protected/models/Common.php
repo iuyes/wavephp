@@ -47,6 +47,16 @@ class Common
     }
 
     /**
+     * 执行sql获得数据
+     * @param string $sql   sql语句
+     * @return array        结果数组
+     */
+    public function getSqlList($sql)
+    {
+        return $this->db()->getAll($sql);
+    }
+
+    /**
      * 获得单个数据
      * @param string $table     表名
      * @param string $allField  查询字段
@@ -58,6 +68,17 @@ class Common
     {
         $sql = "SELECT $allField FROM $table WHERE $field='$id'";
         return $this->db()->getOne($sql);
+    }
+
+    public function getAllData($table, $allField, $field, $id, $in = null)
+    {
+        $sql = "SELECT $allField FROM $table WHERE ";
+        if(empty($in)){
+            $sql .= "$field='$id'";
+        }else{
+            $sql .= "$field IN ($id)";
+        }
+        return $this->db()->getAll($sql);
     }
 
 }

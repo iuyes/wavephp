@@ -15,8 +15,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo Wave::app()->user->getState('userid')."<br>";
-        echo Wave::app()->user->getState('username');
+        if(Wave::app()->user->getState('userid')){
+            $username = Wave::app()->user->getState('username');
+            $this->render('index', array('username'=>$username));
+        }else{
+            $this->redirect(Wave::app()->homeUrl.'/site/login');
+        }
     }
     
     /**
@@ -24,11 +28,12 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $userid = Wave::app()->user->getState('userid');
-        if(empty($userid))
+        if(Wave::app()->user->getState('userid')){
+            $this->redirect(Wave::app()->homeUrl);
+        }else{
+            $this->layout = 'login';
             $this->render('login');
-        else
-            echo Wave::app()->homeUrl;
+        }
     }
 
     /**
@@ -65,6 +70,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Wave::app()->user->logout();
+        $this->redirect(Wave::app()->homeUrl);
     }
 
 }

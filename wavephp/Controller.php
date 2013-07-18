@@ -78,6 +78,17 @@ class Controller
         $VerifyCode->doimg();
         $this->app->user->setState('verifycode', $VerifyCode->getCode(), 300);
     }
+
+    /**
+     * URL跳转
+     * 
+     * @param string $url       跳转URL
+     *
+     */
+    public function redirect($url)
+    {
+        header('Location:'.$url);
+    }
     
 }
 

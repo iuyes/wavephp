@@ -4,15 +4,20 @@
     line-height: 20px;
 }
 body {
-padding-top: 40px;
-padding-bottom: 40px;
 background-color: #f5f5f5;
 font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+letter-spacing: normal;
+text-rendering: auto;
+vertical-align: top;
+word-spacing: normal;
 }
+a{ text-decoration: none; color: #21759B;}
+a:hover{ color: #D54E21;}
+
 .form-signin {
 max-width: 280px;
 padding: 19px 29px 29px;
-margin: 0 auto 20px;
+margin: 100px auto 20px;
 background-color: #fff;
 border: 1px solid #e5e5e5;
 border-radius: 5px;
@@ -34,3 +39,98 @@ margin-bottom: 10px;
 .form-signin #remember{ margin-top: 4px;}
 .form-signin .pure-checkbox{ padding: 10px 0;}
 .warning{ display: none;}
+
+#layout {
+    left: 0;
+    padding-left: 150px;
+}
+#layout, #menu, .pure-menu-link {
+    transition: all 0.2s ease-out 0s;
+}
+#menu {
+    background: none repeat scroll 0 0 #191818;
+    bottom: 0;
+    left: 150px;
+    margin-left: -150px;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: 150px;
+    z-index: 1000;
+}
+#menu a {
+    border: medium none;
+    color: #999999;
+    padding: 10px 0 10px 20px;
+    white-space: normal;
+}
+#menu .pure-menu-open {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+}
+#menu .pure-menu ul {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+}
+#menu .pure-menu ul, #menu .pure-menu .menu-item-divided {
+    border-top: 1px solid #333333;
+}
+#menu .pure-menu li a:hover, #menu .pure-menu li a:focus {
+    background: none repeat scroll 0 0 #333333;
+}
+#menu .pure-menu-heading {
+    color: #FFFFFF;
+    font-size: 140%;
+}
+#menu .pure-menu-heading:hover, #menu .pure-menu-heading:focus {
+    color: #999999;
+}
+#menu .pure-menu-selected {
+    background: none repeat scroll 0 0 #1F8DD6;
+}
+#menu .pure-menu-selected a {
+    color: #FFFFFF;
+}
+#menu li.pure-menu-selected a:hover, #menu li.pure-menu-selected a:focus {
+    background: none repeat scroll 0 0 transparent;
+}
+
+#main .header{ width: 100%;}
+#main .header .welcome{ width: 250px; position: relative;}
+#main .header .welcome a{ line-height: 30px;}
+#main .header .info{ position: absolute; z-index: 9999; border: 1px solid #ccc; height: 70px; width: 220px; display: none; background: #FFF;}
+#main .header .avatar{ width: 48px; margin: 8px 0 0 5px;}
+#main .header .inmenu{ width: 160px; border: 0; margin-left: 5px;}
+#main .header .welcome .pure-menu li a {
+    padding: 0 20px;
+}
+
+.container{ padding: 20px;}
+.intermediate { margin-top: 30px; }
+.overview,.publish { border: 1px solid #DFDFDF; margin-left: 20px; width: 48%; border-radius: 3px;
+    box-shadow: 0 1px 0 #FFFFFF inset;}
+.h{ text-indent: 10px; font-size: 16px; line-height: 30px; border-bottom: 1px solid #DFDFDF; border-radius: 3px;}
+.overview .inside{ padding: 10px;}
+.overview .inside .sub{ line-height: 30px; border-bottom: 1px solid #ECECEC; }
+.overview .inside .table{ width: 47%;}
+.overview .inside .pure-table{ width: 100%; border: 0;}
+.overview .inside .pure-table td{ border: 0;}
+.overview .spam {
+    color: red;
+}
+.overview .waiting {
+    color: #E66F00;
+}
+.overview .approved {
+    color: green;
+}
+.pub-form{ padding: 10px;}
+.pub-form .pure-input-1{ margin-bottom: 10px;}
+.pub-form .tag{ margin-top: 10px;}
+
+.c-top{ margin-bottom: 20px; font-size: 26px;}
+.c-top .write{ margin-left: 30px;}
+
+.search #category{ border: 1px solid #DFDFDF; border-radius: 3px; padding: 5px 8px;}
+.article-list{ margin-top: 10px;}
+.article-table{ width: 100%;}
