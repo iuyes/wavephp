@@ -1,21 +1,22 @@
+<?php $homeurl = Wave::app()->homeUrl;?>
 <div class="c-top">
-    文章 <span class="write"><a href="">写文章</a></span>
+    文章 <span class="write"><a href="<?=$homeurl?>/articles/modifypage/0">写文章</a></span>
 </div>
 <div class="search">
     <select name="category" id="category">
         <option value="0">查看所有分类目录</option>
-        <option class="level-0" value="14">IOS</option>
-        <option class="level-0" value="10">JS+HTML+DIV+CSS</option>
-        <option class="level-0" value="4">Linux</option>
-        <option class="level-0" value="3">PHP</option>
-        <option class="level-0" value="16">Python</option>
-        <option class="level-0" value="15">其他</option>
-        <option class="level-0" value="9">数据</option>
-        <option class="level-0" value="1">生活</option>
+        <?php foreach ($catlist as $key => $value):?>
+            <option value="<?=$value['term_id']?>"><?=$value['name']?></option>
+            <?php if(!empty($value['sub'])):?>
+                <?php foreach ($value['sub'] as $k => $v):?>
+                    <option value="<?=$v['term_id']?>"> &nbsp;&nbsp;<?=$v['name']?></option>
+                <?php endforeach;?>
+            <?php endif;?>
+        <?php endforeach;?>
     </select>
     <button type="submit" class="pure-button pure-button-small">过滤</button>
 </div>
-<div class="article-list">
+<div class="list">
     <table class="article-table pure-table pure-table-horizontal">
         <thead>
             <tr>

@@ -78,7 +78,7 @@ $(function(){
                                 <a href="">编辑我的个人资料</a>
                             </li>
                             <li class=" ">
-                                <a href="">登出</a>
+                                <a href="<?=Wave::app()->homeUrl.'/site/logout'?>">登出</a>
                             </li>
                         </ul>
                     </div>

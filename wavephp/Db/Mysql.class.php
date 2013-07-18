@@ -168,7 +168,26 @@ class Mysql
         }
         return $arr;
     }
- 
+
+    /**
+     * 删除数据
+     *
+     * @param string $table         : 表名
+     * @param string $fields        : 条件
+     *
+     * @return boolean
+     *
+     */
+    public function delete($table, $fields)
+    {
+        $sql = "DELETE FROM $table WHERE $fields";
+        if($this->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * 取得结果数据
      *

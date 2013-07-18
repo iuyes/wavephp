@@ -132,5 +132,18 @@ margin-bottom: 10px;
 .c-top .write{ margin-left: 30px;}
 
 .search #category{ border: 1px solid #DFDFDF; border-radius: 3px; padding: 5px 8px;}
-.article-list{ margin-top: 10px;}
+.list{ margin-top: 10px;}
 .article-table{ width: 100%;}
+.list .left,.list .right{ width: 48%;}
+.categories-table,.form .input,.form select,.form textarea{ width: 100%;}
+.form textarea{ height: 100px;}
+.form button{ margin-top: 30px;}
+
+/*文章*/
+.category{ border: 1px solid #DFDFDF; width: 20%;}
+input[type="checkbox"], input[type="radio"] {
+    margin: 1px 0 0;
+    padding: 0;
+    vertical-align: text-top;
+}
+ul {margin: 0;}

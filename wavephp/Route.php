@@ -74,7 +74,7 @@ class Route
             if(count($pathInfoArr) > 2){
                 array_shift($pathInfoArr);
                 array_shift($pathInfoArr);
-                $callarray = array_filter($pathInfoArr);
+                $callarray = $pathInfoArr;
             }
         }else{
             $c = ucfirst($this->defaultControl).'Controller';
