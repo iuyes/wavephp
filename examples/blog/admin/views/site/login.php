@@ -1,33 +1,41 @@
 <script type="text/javascript">
+var getsubmit = function(){
+    var user_login = $("#user_login").val();
+    var user_pass = $("#user_pass").val();
+    if(!user_login){
+        $("#warning").css({"display":"block"});
+        $("#warning").html("请输入用户名！");
+        return false;
+    }
+    if(!user_pass){
+        $("#warning").css({"display":"block"});
+        $("#warning").html("请输入密码！");
+        return false;
+    }
+    $("#warning").css({"display":"none"});
+    $.ajax({
+        type: "POST",
+        url: "<?php echo Wave::app()->homeUrl.'/site/loging';?>",
+        data: $("#login-form").serialize(),
+        dataType: "json",
+        success: function(data){
+            if(data.success == true){
+                window.location.href="<?php echo Wave::app()->homeUrl.'/site';?>";
+            }else{
+                $("#warning").css({"display":"block"});
+                $("#warning").html(data.msg);
+            }
+        }
+    });
+}
+
 $(function(){
     $("#submit").click(function(){
-        var user_login = $("#user_login").val();
-        var user_pass = $("#user_pass").val();
-        if(!user_login){
-            $("#warning").css({"display":"block"});
-            $("#warning").html("请输入用户名！");
-            return false;
-        }
-        if(!user_pass){
-            $("#warning").css({"display":"block"});
-            $("#warning").html("请输入密码！");
-            return false;
-        }
-        $("#warning").css({"display":"none"});
-        $.ajax({
-            type: "POST",
-            url: "<?php echo Wave::app()->homeUrl.'/site/loging';?>",
-            data: $("#login-form").serialize(),
-            dataType: "json",
-            success: function(data){
-                if(data.success == true){
-                    window.location.href="<?php echo Wave::app()->homeUrl.'/site';?>";
-                }else{
-                    $("#warning").css({"display":"block"});
-                    $("#warning").html(data.msg);
-                }
-            }
-        });
+        getsubmit();
+    })
+    
+    $("#user_pass").keydown(function(event){
+        if (event.keyCode==13) { getsubmit(); } 
     })
 })
 </script>
