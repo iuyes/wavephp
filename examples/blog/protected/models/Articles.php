@@ -65,10 +65,5 @@ class Articles
         return $arr;
     }
 
-    public function getTermRelationships($Common, $article_id)
-    {
-        return ;
-    }
-
 
 }

@@ -89,7 +89,43 @@ class Controller
     {
         header('Location:'.$url);
     }
-    
+
+    /**
+     * 弹窗 跳转
+     *
+     * @param string $msg       弹窗内容
+     * @param string $url       跳转URL
+     * @param int $jumpTime     跳转时间，默认3秒
+     *
+     */
+    public function jumpBox($msg, $url, $jumpTime = 3)
+    {
+        $str = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                <html xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>错误弹窗</title>
+                <style type="text/css">
+                *,body{ padding: 0; margin: 0;}
+                .box{ margin: 0 auto; padding: 30px; border-radius:3px; border: 5px solid #000; width: 400px; margin-top: 15%;}
+                </style>
+                <script type="text/javascript">
+                var jump = function(){
+                    window.location.href="'.$url.'";
+                }
+                setTimeout(jump, '.($jumpTime*1000).');
+                </script>
+                </head>
+                <body>
+                <div class="box">
+                    '.$msg.'
+                </div>
+                </body>
+                </html>';
+
+        exit($str);
+    }
+
 }
 
 

@@ -135,7 +135,7 @@ margin-bottom: 10px;
 .list{ margin-top: 10px;}
 .article-table{ width: 100%;}
 .list .left,.list .right{ width: 48%;}
-.categories-table,.form .input,.form select,.form textarea{ width: 100%;}
+.tags-table,.categories-table,.form .input,.form select,.form textarea{ width: 100%;}
 .form textarea{ height: 100px;}
 .form button{ margin-top: 30px;}
 

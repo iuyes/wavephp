@@ -15,7 +15,7 @@ var checkForm = function(){
 </div>
 <div class="list clearfix">
     <div class="left">
-        <form class="pure-form pure-form-stacked form" action="<?=$homeurl?>/categories/modify" method="POST" onsubmit="return checkForm()">
+        <form class="pure-form pure-form-stacked form" action="<?=$homeurl?>/tags/modify" method="POST" onsubmit="return checkForm()">
             <fieldset>
                 <legend>添加新标签</legend>
 
@@ -30,7 +30,7 @@ var checkForm = function(){
         </form>
     </div>
     <div class="right">
-        <table class="categories-table pure-table pure-table-horizontal">
+        <table class="tags-table pure-table pure-table-horizontal">
             <thead>
                 <tr>
                     <th>名称</th>
@@ -45,9 +45,9 @@ var checkForm = function(){
                         <td><?=$value['name']?></td>
                         <td><?=$value['description']?></td>
                         <td><?=$value['count']?></td>
-                        <td><a href="<?=$homeurl?>/categories/edit/<?=$value['term_id']?>">编辑</a> 
+                        <td><a href="<?=$homeurl?>/tags/edit/<?=$value['term_id']?>">编辑</a> 
                             | 
-                            <a href="<?=$homeurl?>/categories/delete/<?=$value['term_id']?>">删除</a></td>
+                            <a href="<?=$homeurl?>/tags/delete/<?=$value['term_id']?>">删除</a></td>
                     </tr>
                     <?php if(!empty($value['sub'])):?>
                         <?php foreach ($value['sub'] as $k => $v):?>
@@ -55,9 +55,9 @@ var checkForm = function(){
                                 <td>—— <?=$v['name']?></td>
                                 <td><?=$v['description']?></td>
                                 <td><?=$v['count']?></td>
-                                <td><a href="<?=$homeurl?>/categories/edit/<?=$v['term_id']?>">编辑</a> 
+                                <td><a href="<?=$homeurl?>/tags/edit/<?=$v['term_id']?>">编辑</a> 
                                     |
-                                    <a href="<?=$homeurl?>/categories/delete/<?=$v['term_id']?>">删除</a></td>
+                                    <a href="<?=$homeurl?>/tags/delete/<?=$v['term_id']?>">删除</a></td>
                             </tr>
                         <?php endforeach;?>
                     <?php endif;?>

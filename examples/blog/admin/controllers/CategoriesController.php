@@ -41,10 +41,15 @@ class CategoriesController extends Controller
         $cid = (int)$_POST['cid'];
         $data = $Common->getFilter($_POST);
         unset($data['cid']);
-        if($cid > 0) $Terms->modifyTerms($Common, $data, $cid, 'category');
-        else $Terms->addTerms($Common, $data, 'category');
+        if($cid > 0) {
+            $Terms->modifyTerms($Common, $data, $cid, 'category');
+            $msg = '修改成功！';
+        }else{
+            $Terms->addTerms($Common, $data, 'category');
+            $msg = '添加成功！';
+        }
 
-        $this->redirect(Wave::app()->homeUrl.'/categories');
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 2);
     }
 
     /**
@@ -73,12 +78,18 @@ class CategoriesController extends Controller
             $Common = new Common();
             $Terms = new Terms();
             $res = $Terms->getDelete($Common, $id);
-            if($res === false) {
-                echo "<script>alert('有子类，不能删除！')</script>";
+            if($res === 1) {
+                $msg = '有子类，不能删除！';
+            }elseif($res === 2){
+                $msg = '有文章，不能删除！';
+            }else{
+                $msg = '删除成功！';
             }
+        }else{
+           $msg = '请选择要删除的分类！'; 
         }
 
-        $this->redirect(Wave::app()->homeUrl.'/categories');
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 2);
     }
 
 }

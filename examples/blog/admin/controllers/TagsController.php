@@ -41,10 +41,15 @@ class TagsController extends Controller
         $cid = (int)$_POST['cid'];
         $data = $Common->getFilter($_POST);
         unset($data['cid']);
-        if($cid > 0) $Terms->modifyTerms($Common, $data, $cid, 'post_tag');
-        else $Terms->addTerms($Common, $data, 'post_tag');
+        if($cid > 0){
+            $Terms->modifyTerms($Common, $data, $cid, 'post_tag');
+            $msg = '修改成功！';
+        }else{
+            $Terms->addTerms($Common, $data, 'post_tag');
+            $msg = '添加成功！';
+        }
 
-        $this->redirect(Wave::app()->homeUrl.'/tags');
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 2);
     }
 
     /**
@@ -72,12 +77,18 @@ class TagsController extends Controller
             $Common = new Common();
             $Terms = new Terms();
             $res = $Terms->getDelete($Common, $id);
-            if($res === false) {
-                echo "<script>alert('有子类，不能删除！')</script>";
+            if($res === 1) {
+                $msg = '有子类，不能删除！';
+            }elseif($res === 2){
+                $msg = '有文章，不能删除！';
+            }else{
+                $msg = '删除成功！';
             }
+        }else{
+           $msg = '请选择要删除的标签！'; 
         }
 
-        $this->redirect(Wave::app()->homeUrl.'/categories');
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 2);
     }
 
 }

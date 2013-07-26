@@ -77,6 +77,7 @@ class Common
     public function getOneData($table, $allField, $field, $id)
     {
         $sql = "SELECT $allField FROM $table WHERE $field='$id'";
+
         return $this->db()->getOne($sql);
     }
 
@@ -96,6 +97,7 @@ class Common
         }else{
             $sql .= "$field IN ($id)";
         }
+        
         return $this->db()->getAll($sql);
     }
 

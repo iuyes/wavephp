@@ -94,7 +94,10 @@ class Terms
     public function getDelete($Common, $id)
     {
         $count = $Common->getFieldCount('term_taxonomy', 'parent', $id);
-        if($count > 0) return false;
+        if($count > 0) return 1;
+
+        $term_taxonomy = $Common->getOneData('term_taxonomy', 'term_taxonomy_id,count', 'term_id', $id);
+        if((int)$term_taxonomy['count'] > 0) return 2;
 
         $Common->getDelete($this->tableName(), 'term_id', $id);
         $Common->getDelete('term_taxonomy', 'term_id', $id);
