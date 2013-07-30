@@ -49,7 +49,7 @@ class CategoriesController extends Controller
             $msg = '添加成功！';
         }
 
-        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 2);
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 1);
     }
 
     /**
@@ -89,7 +89,7 @@ class CategoriesController extends Controller
            $msg = '请选择要删除的分类！'; 
         }
 
-        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 2);
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/categories', 1);
     }
 
 }

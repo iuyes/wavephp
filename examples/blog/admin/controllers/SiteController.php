@@ -16,8 +16,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if(Wave::app()->user->getState('userid')){
-            $username = Wave::app()->user->getState('username');
-            $this->render('index', array('username'=>$username));
+            $infoarr = array();
+            $Common = new Common();
+            $Articles = new Articles();
+            $Terms = new Terms();
+            $infoarr['article_count'] = $Articles->getArticleCount($Common);
+            $infoarr['cate_count'] = $Terms->getTermsCount($Common, 'category');
+            $infoarr['tag_count'] = $Terms->getTermsCount($Common, 'post_tag');
+            $this->render('index', array('infoarr'=>$infoarr));
         }else{
             $this->redirect(Wave::app()->homeUrl.'/site/login');
         }

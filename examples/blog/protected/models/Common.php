@@ -26,7 +26,15 @@ class Common
     public function getFilter($data)
     {
         foreach ($data as $key => $value) {
-            $data[$key] = addslashes($value);
+            if(!empty($value)){
+                if(is_array($value)){
+                    foreach ($value as $k => $v) {
+                        $data[$key][$k] = addslashes($v);
+                    }
+                }else{
+                    $data[$key] = addslashes($value);
+                }
+            }
         }
 
         return $data;
@@ -103,9 +111,23 @@ class Common
 
     /**
      * 根据字段统计数量
-     * @param string $table 表名
-     * @param string $field 条件字段名
-     * @param string $id    条件
+     * @param string $table     表名
+     * @return int              数量
+     */
+    public function getCount($table)
+    {
+        $sql = "SELECT count(*) count FROM $table";
+        $count = $this->getSqlOne($sql);
+        
+        return $count['count'];
+    }
+
+    /**
+     * 根据字段统计数量
+     * @param string $table     表名
+     * @param string $field     条件字段名
+     * @param string $id        条件
+     * @return int              数量
      */
     public function getFieldCount($table, $field, $id)
     {
@@ -164,6 +186,43 @@ class Common
         }else{
             return $this->db()->delete($table, "$field in ($id)");
         }
+    }
+
+    /**
+     * 分页
+     * @param string $url       地址
+     * @param int $allcount     总数
+     * @param int $pagesize     页显示数量
+     * @param int $page         当前页
+     * @return string           分页
+     */
+    public function getAdminPageBar($url, $allcount, $pagesize, $page)
+    {
+        $pagenum = ceil($allcount/$pagesize);
+        $prev = '<li class="cute">
+                    <a href="'.$url.'">&lt;&lt;</a>
+                </li>';
+        $prev_page = '<li class="cute">
+                        <a href="'.$url.'?page='.($page == 1 ? 1 : $page-1).'">
+                            &lt;
+                        </a>
+                    </li>';
+        $info = '<li class="center">
+                    第 <input type="text" value="'.$page.'"> 页，共'.$pagenum.'页
+                </li>';
+        $next_page = '<li class="cute">
+                        <a href="'.$url.'?page='.($page == $pagenum ? $pagenum : $page+1).'">
+                            &gt;
+                        </a>
+                    </li>';
+        $next = '<li class="cute">
+                    <a href="'.$url.'?page='.$pagenum.'">
+                        &gt;&gt;
+                    </a>
+                </li>';
+        $bar = '<ul>'.$prev.$prev_page.$info.$next_page.$next.'</ul>';
+
+        return $bar;
     }
 
 }

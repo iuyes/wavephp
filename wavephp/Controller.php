@@ -49,6 +49,7 @@ class Controller
     {
         $classname = get_class($this);
         $folder = strtolower(str_replace('Controller', '', $classname));
+        error_reporting(E_ERROR | E_WARNING | E_PARSE);
         //数组变量转换
         extract($variables, EXTR_SKIP);
         ob_start();
@@ -104,7 +105,7 @@ class Controller
                 <html xmlns="http://www.w3.org/1999/xhtml">
                 <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title>错误弹窗</title>
+                <title>信息弹窗</title>
                 <style type="text/css">
                 *,body{ padding: 0; margin: 0;}
                 .box{ margin: 0 auto; padding: 30px; border-radius:3px; border: 5px solid #000; width: 400px; margin-top: 15%;}

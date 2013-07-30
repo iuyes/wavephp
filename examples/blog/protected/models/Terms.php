@@ -15,6 +15,9 @@ class Terms
 
     /**
      * 获得分类
+     * @param class $Common     公共类模型
+     * @param string $type      类型
+     * @return array            分类数组
      */
     public function getTermsList($Common, $type)
     {
@@ -39,7 +42,28 @@ class Terms
     }
 
     /**
+     * 获得分类数量
+     * @param class $Common     公共类模型
+     * @param string $type      类型
+     * @return int              数量
+     */
+    public function getTermsCount($Common, $type)
+    {
+        $sql = "SELECT count(*) count FROM term_taxonomy tax
+                LEFT JOIN terms
+                ON tax.term_id=terms.term_id
+                WHERE tax.taxonomy='$type'";
+        $arr = $Common->getSqlOne($sql);
+
+        return $arr['count'];
+    }
+
+    /**
      * 获得单个分类
+     * @param class $Common     公共类模型
+     * @param int $id           分类id
+     * @param string $type      类型
+     * @return array            分类数组
      */
     public function getOneTerms($Common, $id, $type)
     {
@@ -55,6 +79,10 @@ class Terms
 
     /**
      * 添加分类
+     * @param class $Common     公共类模型
+     * @param array $data       添加数组
+     * @param string $type      类型
+     * @return boolearn         true or false
      */
     public function addTerms($Common, $data, $type)
     {
@@ -73,6 +101,11 @@ class Terms
 
     /**
      * 编辑分类
+     * @param class $Common     公共类模型
+     * @param array $data       编辑数组
+     * @param int $id           分类id
+     * @param string $type      类型
+     * @return boolearn         true or false
      */
     public function modifyTerms($Common, $data, $id, $type)
     {
@@ -90,6 +123,9 @@ class Terms
 
     /**
      * 删除分类
+     * @param class $Common     公共类模型
+     * @param int $id           分类id
+     * @return boolearn         true or false
      */
     public function getDelete($Common, $id)
     {

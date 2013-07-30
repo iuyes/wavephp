@@ -140,10 +140,19 @@ margin-bottom: 10px;
 .form button{ margin-top: 30px;}
 
 /*文章*/
-.category{ border: 1px solid #DFDFDF; width: 20%;}
+.category{ border: 1px solid #DFDFDF; width: 500px; height: 130px; overflow-y: scroll;}
 input[type="checkbox"], input[type="radio"] {
     margin: 1px 0 0;
     padding: 0;
     vertical-align: text-top;
 }
 ul {margin: 0;}
+
+/*分页*/
+.pagebar{ margin-top: 20px;}
+.pagebar ul{ float: right;}
+.pagebar ul li{ float: left; line-height: 22px;}
+.pagebar ul li.cute{ border: 1px solid #ccc; margin-left: 10px; border-radius: 3px;}
+.pagebar ul li.cute a{ padding: 3px 8px;}
+.pagebar ul li.center{ margin-left: 10px;}
+.center input{ width: 20px; border: 1px solid #DFDFDF; border-radius: 3px; padding: 3px; text-align: center;}

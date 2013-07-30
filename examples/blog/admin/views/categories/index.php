@@ -68,9 +68,11 @@ var checkForm = function(){
                                 <td>—— <?=$v['name']?></td>
                                 <td><?=$v['description']?></td>
                                 <td><?=$v['count']?></td>
-                                <td><a href="<?=$homeurl?>/categories/edit/<?=$v['term_id']?>">编辑</a> 
+                                <td>
+                                    <a href="<?=$homeurl?>/categories/edit/<?=$v['term_id']?>">编辑</a> 
                                     |
-                                    <a href="<?=$homeurl?>/categories/delete/<?=$v['term_id']?>">删除</a></td>
+                                    <a href="<?=$homeurl?>/categories/delete/<?=$v['term_id']?>">删除</a>
+                                </td>
                             </tr>
                         <?php endforeach;?>
                     <?php endif;?>

@@ -1,3 +1,4 @@
+<?php $homeurl = Wave::app()->homeUrl;?>
 <script src="<?=Wave::app()->request->baseUrl?>/resouce/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=Wave::app()->request->baseUrl?>/resouce/ckfinder/ckfinder.js"></script>
 <script type="text/javascript">
@@ -9,6 +10,16 @@ $(function(){
         filebrowserFlashUploadUrl : "&type=flash"
     });
 })
+
+var checkForm = function(){
+    var title = $("#title").val();
+    if(!title){
+        alert("请输入标题！");
+        return false;
+    }
+
+    return true;
+}
 </script>
 <div class="intermediate clearfix">
     <div class="overview left">
@@ -20,10 +31,10 @@ $(function(){
                     <tbody>
                         <tr class="first">
                             <td class="first b b-posts" width="50px">
-                                <a href="edit.php">69</a>
+                                <a href="<?=$homeurl.'/articles'?>"><?=$infoarr['article_count']?></a>
                             </td>
                             <td class="t posts">
-                                <a href="edit.php">文章</a>
+                                <a href="<?=$homeurl.'/articles'?>">文章</a>
                             </td>
                         </tr>
                         <tr>
@@ -36,18 +47,18 @@ $(function(){
                         </tr>
                         <tr>
                             <td class="first b b-cats">
-                                <a href="edit-tags.php?taxonomy=category">8</a>
+                                <a href="<?=$homeurl.'/categories'?>"><?=$infoarr['cate_count']?></a>
                             </td>
                             <td class="t cats">
-                                <a href="edit-tags.php?taxonomy=category">分类目录</a>
+                                <a href="<?=$homeurl.'/categories'?>">分类目录</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="first b b-tags">
-                                <a href="edit-tags.php">28</a>
+                                <a href="<?=$homeurl.'/tags'?>"><?=$infoarr['tag_count']?></a>
                             </td>
                                 <td class="t tags">
-                            <a href="edit-tags.php">标签</a>
+                            <a href="<?=$homeurl.'/tags'?>">标签</a>
                             </td>
                         </tr>
                     </tbody>
@@ -105,13 +116,16 @@ $(function(){
     <div class="publish left">
         <div class="h">快速发布</div>
         <div class="pub-form">
-            <form class="pure-form">
-                <input class="pure-input-1" type="text" placeholder="在此键入标题">
+            <form class="pure-form" action="<?=$homeurl?>/articles/modify" method="POST" onsubmit="return checkForm()">
+                <input class="pure-input-1" id="title" type="text" name="title" placeholder="在此键入标题">
                 
                 <textarea cols="80" id="content" name="content" rows="10"></textarea>
 
-                <input class="pure-input-1 tag" type="text" placeholder="标签（用英文逗号分隔）">
+                <input class="pure-input-1 tag" name="tags" type="text" placeholder="标签（用英文逗号分隔）">
 
+                <input type="hidden" name="aid" value="0">
+                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="cate" value="0">
                 <button type="submit" class="pure-button pure-button-primary">发布</button>
             </form>
         </div>

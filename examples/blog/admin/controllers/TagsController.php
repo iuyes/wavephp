@@ -49,7 +49,7 @@ class TagsController extends Controller
             $msg = '添加成功！';
         }
 
-        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 2);
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 1);
     }
 
     /**
@@ -88,7 +88,7 @@ class TagsController extends Controller
            $msg = '请选择要删除的标签！'; 
         }
 
-        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 2);
+        $this->jumpBox($msg, Wave::app()->homeUrl.'/tags', 1);
     }
 
 }

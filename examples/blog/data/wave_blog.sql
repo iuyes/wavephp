@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 26 日 17:24
+-- 生成日期: 2013 年 07 月 30 日 18:24
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -46,7 +46,31 @@ CREATE TABLE IF NOT EXISTS `articles` (
   KEY `type_status_date` (`post_type`,`status`,`add_date`,`id`),
   KEY `post_parent` (`post_parent`),
   KEY `post_author` (`add_author`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+
+--
+-- 转存表中的数据 `articles`
+--
+
+INSERT INTO `articles` (`id`, `add_author`, `add_date`, `content`, `title`, `post_excerpt`, `status`, `comment_status`, `modify_date`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
+(1, 1, '2013-07-30 13:52:09', '<p>sssssssssssssssssssssssssssssss222</p>\r\n', 'ssssssssssssssaaaaaaaaaa', '', 'publish', 'open', '2013-07-30 17:47:55', 0, '', 0, 'post', '', 0),
+(2, 1, '2013-07-30 14:45:02', '<p>wwwwwwwwwwwwwwwwwwwwwwwww</p>\r\n', 'eeeeeeeeeeeeeeeee', '', 'publish', 'open', '2013-07-30 17:47:20', 0, '', 0, 'post', '', 0),
+(4, 1, '2013-07-30 15:51:25', '<p>wwwwwwwwwerafasdfsssssss</p>\r\n', 'sssssswwwwwwww', '', 'publish', 'open', '2013-07-30 17:47:12', 0, '', 0, 'post', '', 0),
+(5, 1, '2013-07-30 16:06:37', '<p>sssssswwwwwwwwwwwww</p>\r\n', 'dddddddddaaaaaaa', '', 'publish', 'open', '2013-07-30 16:06:37', 0, '', 0, 'post', '', 0),
+(12, 1, '2013-07-30 16:18:11', '<p>fasdfsadfsdfsdssss</p>\r\n', 'fffffffff', '', 'publish', 'open', '2013-07-30 18:23:20', 0, '', 0, 'post', '', 0),
+(13, 1, '2013-07-30 16:18:25', '<p>asdfasdfadsssssssssssssswwww</p>\r\n', 'ddddddddddaaaaaaaawwaaaa', '', 'publish', 'open', '2013-07-30 18:23:14', 0, '', 0, 'post', '', 0),
+(15, 1, '2013-07-30 16:21:43', '<p>wwwwwwwaaaaaaaaaaaa</p>\r\n', 'fsdfsdfsdfsdfdwww', '', 'publish', 'open', '2013-07-30 18:20:45', 0, '', 0, 'post', '', 0),
+(16, 1, '2013-07-30 16:21:56', '<p>wefadsdfasdfasd</p>\r\n', 'sssssswww', '', 'publish', 'open', '2013-07-30 16:21:56', 0, '', 0, 'post', '', 0),
+(17, 1, '2013-07-30 16:22:31', '<p>sssssssss</p>\r\n', 'wwwwwwwwwa', '', 'publish', 'open', '2013-07-30 16:22:31', 0, '', 0, 'post', '', 0),
+(18, 1, '2013-07-30 16:24:33', '<p>wwaaaaaaaaaaa</p>\r\n', 'ssssaaaawww', '', 'publish', 'open', '2013-07-30 16:24:33', 0, '', 0, 'post', '', 0),
+(19, 1, '2013-07-30 16:49:46', '<p>aaaaaaaaaaaaaaaa</p>\r\n', 'ssswwwww', '', 'publish', 'open', '2013-07-30 16:49:46', 0, '', 0, 'post', '', 0),
+(20, 1, '2013-07-30 17:45:22', '<p>sdfasdfasd</p>\r\n', 'sdfasd', '', 'publish', 'open', '2013-07-30 17:46:09', 0, '', 0, 'post', '', 0),
+(21, 1, '2013-07-30 17:45:30', '<p>asdfasdfasd</p>\r\n', 'sdfasdf', '', 'publish', 'open', '2013-07-30 17:47:32', 0, '', 0, 'post', '', 0),
+(22, 1, '2013-07-30 17:45:40', '<p>sdfasdfasdf</p>\r\n', 'sfasdfasd', '', 'publish', 'open', '2013-07-30 17:45:52', 0, '', 0, 'post', '', 0),
+(23, 1, '2013-07-30 17:46:24', '<p>sdfsdf</p>\r\n', 'saaaaaaaaaaaaaa', '', 'publish', 'open', '2013-07-30 17:46:24', 0, '', 0, 'post', '', 0),
+(24, 1, '2013-07-30 18:21:26', '<p>sdfasdfasd</p>\r\n', 'fasdfsdfd', '', 'publish', 'open', '2013-07-30 18:21:26', 0, '', 0, 'post', '', 0),
+(25, 1, '2013-07-30 18:22:34', '<p>wwwwwwwww</p>\r\n', 'ssssssssssss', '', 'publish', 'open', '2013-07-30 18:22:34', 0, '', 0, 'post', '', 0),
+(26, 1, '2013-07-30 18:22:54', '<p>sdfasdfasd</p>\r\n', 'zdfasdf', '', 'publish', 'open', '2013-07-30 18:22:54', 0, '', 0, 'post', '', 0);
 
 -- --------------------------------------------------------
 
@@ -59,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `terms` (
   `name` varchar(200) NOT NULL DEFAULT '',
   PRIMARY KEY (`term_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- 转存表中的数据 `terms`
@@ -80,6 +104,7 @@ INSERT INTO `terms` (`term_id`, `name`) VALUES
 (26, 'mysql'),
 (35, 'nginx'),
 (32, 'php'),
+(49, 'PHP'),
 (16, 'Python'),
 (31, 'python'),
 (27, 'redis'),
@@ -112,6 +137,52 @@ CREATE TABLE IF NOT EXISTS `term_relationships` (
   KEY `term_taxonomy_id` (`term_taxonomy_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `term_relationships`
+--
+
+INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
+(1, 1),
+(20, 1),
+(22, 1),
+(1, 4),
+(2, 4),
+(4, 4),
+(17, 4),
+(26, 4),
+(12, 10),
+(2, 14),
+(4, 14),
+(18, 14),
+(21, 14),
+(23, 14),
+(4, 15),
+(5, 15),
+(17, 27),
+(1, 32),
+(26, 32),
+(5, 33),
+(12, 33),
+(13, 33),
+(15, 33),
+(16, 33),
+(19, 33),
+(20, 33),
+(24, 33),
+(2, 42),
+(4, 42),
+(18, 42),
+(21, 42),
+(22, 42),
+(23, 42),
+(25, 42),
+(13, 50),
+(15, 50),
+(16, 50),
+(19, 50),
+(24, 50),
+(25, 50);
+
 -- --------------------------------------------------------
 
 --
@@ -128,19 +199,19 @@ CREATE TABLE IF NOT EXISTS `term_taxonomy` (
   PRIMARY KEY (`term_taxonomy_id`),
   UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
   KEY `taxonomy` (`taxonomy`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- 转存表中的数据 `term_taxonomy`
 --
 
 INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
-(1, 1, 'category', '发表关于保时捷的文章', 0, 0),
-(4, 4, 'category', 'dd', 0, 0),
+(1, 1, 'category', '发表关于保时捷的文章', 0, 3),
+(4, 4, 'category', 'dd', 0, 5),
 (9, 9, 'category', 'dda', 4, 0),
-(10, 10, 'category', 'asdf', 0, 0),
-(14, 14, 'category', 'sdf', 0, 0),
-(15, 15, 'category', 'sdfaa', 0, 0),
+(10, 10, 'category', 'asdf', 0, 1),
+(14, 14, 'category', 'sdf', 0, 5),
+(15, 15, 'category', 'sdfaa', 0, 2),
 (16, 16, 'category', 'sdfs', 0, 0),
 (17, 17, 'post_tag', 'dfdf', 0, 0),
 (18, 18, 'post_tag', 'dfgdf', 0, 0),
@@ -151,13 +222,13 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (24, 24, 'post_tag', '', 0, 0),
 (25, 25, 'post_tag', '', 0, 0),
 (26, 26, 'post_tag', '', 0, 0),
-(27, 9, 'post_tag', '', 0, 0),
+(27, 9, 'post_tag', '', 0, 1),
 (28, 27, 'post_tag', '', 0, 0),
 (29, 28, 'post_tag', '', 0, 0),
 (30, 29, 'post_tag', '', 0, 0),
 (31, 30, 'post_tag', '', 0, 0),
-(32, 31, 'post_tag', '', 0, 0),
-(33, 32, 'post_tag', '', 0, 0),
+(32, 31, 'post_tag', '', 0, 2),
+(33, 32, 'post_tag', '', 0, 8),
 (34, 33, 'post_tag', '', 0, 0),
 (35, 34, 'post_tag', '', 0, 0),
 (36, 35, 'post_tag', '', 0, 0),
@@ -165,8 +236,9 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (38, 37, 'post_tag', '', 0, 0),
 (39, 38, 'post_tag', '', 0, 0),
 (40, 39, 'post_tag', '', 0, 0),
-(42, 41, 'post_tag', '', 0, 3),
-(45, 44, 'category', '', 0, 3);
+(42, 41, 'post_tag', '', 0, 7),
+(45, 44, 'category', '', 0, 0),
+(50, 49, 'category', '', 0, 6);
 
 -- --------------------------------------------------------
 
