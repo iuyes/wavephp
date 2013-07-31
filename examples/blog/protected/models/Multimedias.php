@@ -97,14 +97,10 @@ class Multimedias
         $abso = $imgType == 'gif' ? 'big' : 'medium';
         $file_abso = $baseurl.'/uploadfile/'.$type.'/'.$abso.'/'.$imageName;
         $thumb = PhpThumbFactory::create($files['upload']['tmp_name']);
-        $small_w = isset($imageSet['thumbnail_size_w']) 
-        ? (int)$imageSet['thumbnail_size_w'] : 150;
-        $small_h = isset($imageSet['thumbnail_size_h']) 
-        ? (int)$imageSet['thumbnail_size_h'] : 150;
-        $medium_w = isset($imageSet['medium_size_w']) 
-        ? (int)$imageSet['medium_size_w'] : 500;
-        $medium_h = isset($imageSet['medium_size_h']) 
-        ? (int)$imageSet['medium_size_h'] : 300;
+        $small_w = isset($imageSet['thumbnail_size_w']) ? (int)$imageSet['thumbnail_size_w'] : 150;
+        $small_h = isset($imageSet['thumbnail_size_h']) ? (int)$imageSet['thumbnail_size_h'] : 150;
+        $medium_w = isset($imageSet['medium_size_w']) ? (int)$imageSet['medium_size_w'] : 500;
+        $medium_h = isset($imageSet['medium_size_h']) ? (int)$imageSet['medium_size_h'] : 300;
         $thumb->resize($small_w, $small_h);
         $thumb->save($smallPath.'/'.$imageName, $imgType);
         $thumb = PhpThumbFactory::create($files['upload']['tmp_name']);
