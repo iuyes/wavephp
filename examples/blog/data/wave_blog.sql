@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 30 日 18:24
+-- 生成日期: 2013 年 07 月 31 日 16:00
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   KEY `type_status_date` (`post_type`,`status`,`add_date`,`id`),
   KEY `post_parent` (`post_parent`),
   KEY `post_author` (`add_author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- 转存表中的数据 `articles`
@@ -70,7 +70,61 @@ INSERT INTO `articles` (`id`, `add_author`, `add_date`, `content`, `title`, `pos
 (23, 1, '2013-07-30 17:46:24', '<p>sdfsdf</p>\r\n', 'saaaaaaaaaaaaaa', '', 'publish', 'open', '2013-07-30 17:46:24', 0, '', 0, 'post', '', 0),
 (24, 1, '2013-07-30 18:21:26', '<p>sdfasdfasd</p>\r\n', 'fasdfsdfd', '', 'publish', 'open', '2013-07-30 18:21:26', 0, '', 0, 'post', '', 0),
 (25, 1, '2013-07-30 18:22:34', '<p>wwwwwwwww</p>\r\n', 'ssssssssssss', '', 'publish', 'open', '2013-07-30 18:22:34', 0, '', 0, 'post', '', 0),
-(26, 1, '2013-07-30 18:22:54', '<p>sdfasdfasd</p>\r\n', 'zdfasdf', '', 'publish', 'open', '2013-07-30 18:22:54', 0, '', 0, 'post', '', 0);
+(26, 1, '2013-07-30 18:22:54', '<p>sdfasdfasd</p>\r\n', 'zdfasdf', '', 'publish', 'open', '2013-07-30 18:22:54', 0, '', 0, 'post', '', 0),
+(27, 1, '2013-07-30 18:29:50', '<p>awfadfasdf</p>\r\n', 'wwwwwww', '', 'publish', 'open', '2013-07-31 13:47:03', 0, '', 0, 'post', '', 0),
+(28, 1, '2013-07-30 18:31:26', '<p>sdfasdfsdf</p>\r\n', 'sdfas', '', 'publish', 'open', '2013-07-31 13:46:57', 0, '', 0, 'post', '', 0),
+(29, 1, '2013-07-30 18:31:47', '<p>dfasdfasdf</p>\r\n', 'sdfs', '', 'publish', 'open', '2013-07-31 13:46:51', 0, '', 0, 'post', '', 0),
+(30, 1, '2013-07-30 18:34:26', '<p>sdfsdfsd</p>\r\n', 'sdfsd', '', 'publish', 'open', '2013-07-31 13:46:45', 0, '', 0, 'post', '', 0),
+(31, 1, '2013-07-31 13:45:25', '<p><img alt="55555" src="http://localhost//wavephp/examples/blog/uploadfile/images/medium/1375249478.jpg" style="height:300px; width:225px" /></p>\r\n\r\n<p>图片测试</p>\r\n', '小奶', '', 'publish', 'open', '2013-07-31 13:46:34', 0, '', 0, 'post', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `multimedias`
+--
+
+CREATE TABLE IF NOT EXISTS `multimedias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_type` varchar(20) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `save_name` varchar(255) DEFAULT NULL,
+  `adddate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- 转存表中的数据 `multimedias`
+--
+
+INSERT INTO `multimedias` (`id`, `file_type`, `file_name`, `save_name`, `adddate`) VALUES
+(2, 'images', '小奶.jpg', '1375249478.jpg', '2013-07-31 13:44:38');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `options`
+--
+
+CREATE TABLE IF NOT EXISTS `options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_name` varchar(64) DEFAULT NULL,
+  `option_value` text,
+  `autoload` varchar(20) DEFAULT 'yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- 转存表中的数据 `options`
+--
+
+INSERT INTO `options` (`id`, `option_name`, `option_value`, `autoload`) VALUES
+(1, 'siteurl', 'http://localhost/', 'yes'),
+(2, 'blogname', '寞踪的技术博客', 'yes'),
+(3, 'blogdescription', 'Super Rangers!', 'yes'),
+(4, 'thumbnail_size_w', '150', 'yes'),
+(5, 'thumbnail_size_h', '150', 'yes'),
+(6, 'medium_size_w', '700', 'yes'),
+(7, 'medium_size_h', '400', 'yes');
 
 -- --------------------------------------------------------
 
@@ -83,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `terms` (
   `name` varchar(200) NOT NULL DEFAULT '',
   PRIMARY KEY (`term_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
 -- 转存表中的数据 `terms`
@@ -120,6 +174,7 @@ INSERT INTO `terms` (`term_id`, `name`) VALUES
 (24, '爱好'),
 (1, '生活'),
 (44, '笑话'),
+(50, '笑话'),
 (20, '苦逼'),
 (23, '趣味'),
 (2, '链接表');
@@ -145,6 +200,10 @@ INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
 (1, 1),
 (20, 1),
 (22, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
 (1, 4),
 (2, 4),
 (4, 4),
@@ -158,7 +217,12 @@ INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
 (23, 14),
 (4, 15),
 (5, 15),
+(31, 23),
+(27, 25),
+(28, 26),
 (17, 27),
+(29, 29),
+(30, 31),
 (1, 32),
 (26, 32),
 (5, 33),
@@ -176,6 +240,7 @@ INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
 (22, 42),
 (23, 42),
 (25, 42),
+(31, 45),
 (13, 50),
 (15, 50),
 (16, 50),
@@ -199,14 +264,14 @@ CREATE TABLE IF NOT EXISTS `term_taxonomy` (
   PRIMARY KEY (`term_taxonomy_id`),
   UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
   KEY `taxonomy` (`taxonomy`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `term_taxonomy`
 --
 
 INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
-(1, 1, 'category', '发表关于保时捷的文章', 0, 3),
+(1, 1, 'category', '发表关于保时捷的文章', 0, 7),
 (4, 4, 'category', 'dd', 0, 5),
 (9, 9, 'category', 'dda', 4, 0),
 (10, 10, 'category', 'asdf', 0, 1),
@@ -218,15 +283,15 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (20, 20, 'post_tag', 'fgdfg', 0, 0),
 (21, 21, 'post_tag', 'ddd', 0, 0),
 (22, 22, 'post_tag', '', 0, 0),
-(23, 23, 'post_tag', '', 0, 0),
+(23, 23, 'post_tag', '', 0, 1),
 (24, 24, 'post_tag', '', 0, 0),
-(25, 25, 'post_tag', '', 0, 0),
-(26, 26, 'post_tag', '', 0, 0),
+(25, 25, 'post_tag', '', 0, 1),
+(26, 26, 'post_tag', '', 0, 1),
 (27, 9, 'post_tag', '', 0, 1),
 (28, 27, 'post_tag', '', 0, 0),
-(29, 28, 'post_tag', '', 0, 0),
+(29, 28, 'post_tag', '', 0, 1),
 (30, 29, 'post_tag', '', 0, 0),
-(31, 30, 'post_tag', '', 0, 0),
+(31, 30, 'post_tag', '', 0, 1),
 (32, 31, 'post_tag', '', 0, 2),
 (33, 32, 'post_tag', '', 0, 8),
 (34, 33, 'post_tag', '', 0, 0),
@@ -237,8 +302,9 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (39, 38, 'post_tag', '', 0, 0),
 (40, 39, 'post_tag', '', 0, 0),
 (42, 41, 'post_tag', '', 0, 7),
-(45, 44, 'category', '', 0, 0),
-(50, 49, 'category', '', 0, 6);
+(45, 44, 'category', '', 0, 1),
+(50, 49, 'category', '', 0, 6),
+(51, 50, 'post_tag', '', 0, 0);
 
 -- --------------------------------------------------------
 
