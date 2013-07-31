@@ -106,10 +106,8 @@ class Multimedias
         $thumb = PhpThumbFactory::create($files['upload']['tmp_name']);
         $thumb->resize($medium_w, $medium_h);
         $thumb->save($mediumPath.'/'.$imageName, $imgType);
-        if($imgType == 'gif')
-            move_uploaded_file($files['upload']['tmp_name'],$bigPath.'/'.$imageName);
-        else
-            $thumb->save($bigPath.'/'.$imageName, $imgType);
+        
+        move_uploaded_file($files['upload']['tmp_name'],$bigPath.'/'.$imageName);
         
         return '<script type="text/javascript">
         window.parent.CKEDITOR.tools.callFunction("'.$fn.'","'.$file_abso.'","上传成功");
