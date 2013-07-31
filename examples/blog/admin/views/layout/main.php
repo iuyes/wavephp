@@ -19,6 +19,27 @@ $(function(){
     $("#info").mouseout(function(){
         $(".info").css({"display":"none"});
     })
+
+    $.ajax({
+        type: "GET",
+        url: "<?php echo Wave::app()->homeUrl.'/users/info';?>",
+        data: 'rand='+Math.random(),
+        dataType: "json",
+        success: function(data){
+            if(data.success == true){
+                $("#username").html(data.msg);
+            }else{
+                alert('请登录！');
+            }
+        }
+    });
+
+    var url = window.location.href;
+    var homeUrl = "<?=Wave::app()->homeUrl.'/'?>";
+    var preurl = "http://"+"<?=Wave::app()->request->hostInfo?>"+homeUrl;
+    var pathinfo = url.replace(preurl,"");
+    var ptype = pathinfo.split("/");
+    $("."+ptype[0]).addClass("pure-menu-selected");
 })
 </script>
 </head>
@@ -28,37 +49,37 @@ $(function(){
         <div class="pure-menu pure-menu-open">
             <a class="pure-menu-heading" href="<?=Wave::app()->homeUrl?>">博客后台</a>
             <ul>
-                <li class=" ">
+                <li class="articles">
                     <a href="<?=Wave::app()->homeUrl.'/articles'?>">文章</a>
                 </li>
-                <li class=" ">
+                <li class="categories">
                     <a href="<?=Wave::app()->homeUrl.'/categories'?>">分类</a>
                 </li>
-                <li class=" ">
+                <li class="tags">
                     <a href="<?=Wave::app()->homeUrl.'/tags'?>">标签</a>
                 </li>
-                <li class=" ">
+                <li class="multimedias">
                     <a href="<?=Wave::app()->homeUrl.'/multimedias'?>">多媒体</a>
                 </li>
-                <li class=" ">
+                <li class="links">
                     <a href="<?=Wave::app()->homeUrl.'/links'?>">链接</a>
                 </li>
-                <li class="">
+                <li class="pages">
                     <a href="<?=Wave::app()->homeUrl.'/pages'?>">页面</a>
                 </li>
-                <li class=" ">
+                <li class="comments">
                     <a href="<?=Wave::app()->homeUrl.'/comments'?>">评论</a>
                 </li>
-                <li class="menu-item-divided">
+                <li class="menu-item-divided exterior">
                     <a href="<?=Wave::app()->homeUrl.'/exterior'?>">外观</a>
                 </li>
-                <li class=" ">
+                <li class="plugs">
                     <a href="<?=Wave::app()->homeUrl.'/plugs'?>">插件</a>
                 </li>
-                <li class=" ">
+                <li class="users">
                     <a href="<?=Wave::app()->homeUrl.'/users'?>">用户</a>
                 </li>
-                <li class=" ">
+                <li class="setup">
                     <a href="<?=Wave::app()->homeUrl.'/setup'?>">设置</a>
                 </li>
             </ul>
@@ -67,7 +88,7 @@ $(function(){
     <div id="main">
         <div class="header clearfix">
             <div class="welcome right">
-                <a href="" id="wel-name">欢迎光临：xpmozong</a>
+                <a href="" id="wel-name">欢迎光临：<span id="username"></span></a>
                 <div class="info clearfix" id="info">
                     <div class="avatar left">
                         <img src="<?=Wave::app()->request->baseUrl?>/resouce/images/default.jpg">
@@ -75,7 +96,7 @@ $(function(){
                     <div class="inmenu left pure-menu pure-menu-open">
                         <ul>
                             <li class=" ">
-                                <a href="">编辑我的个人资料</a>
+                                <a href="<?=Wave::app()->homeUrl.'/users/edit'?>">编辑我的个人资料</a>
                             </li>
                             <li class=" ">
                                 <a href="<?=Wave::app()->homeUrl.'/site/logout'?>">登出</a>

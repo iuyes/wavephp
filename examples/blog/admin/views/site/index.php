@@ -5,9 +5,9 @@
 $(function(){
     CKEDITOR.replace( 'content', {
         language: 'zh-cn',
-        filebrowserUploadUrl : "&type=files",
-        filebrowserImageUploadUrl : "&type=images",
-        filebrowserFlashUploadUrl : "&type=flash"
+        filebrowserUploadUrl : "<?=$homeurl?>/articles/upload?type=files",
+        filebrowserImageUploadUrl : "<?=$homeurl?>/articles/upload?type=images",
+        filebrowserFlashUploadUrl : "<?=$homeurl?>/articles/upload?type=flashs"
     });
 })
 

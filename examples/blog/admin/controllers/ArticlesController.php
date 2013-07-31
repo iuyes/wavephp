@@ -103,7 +103,7 @@ class ArticlesController extends Controller
             $Common = new Common();
             $Articles = new Articles();
             $res = $Articles->deleteArticles($Common, $id);
-            $msg = $res === true ? '删除文章成功！' : '删除失败！';
+            $msg = $res === true ? '删除文章成功！' : '删除文章失败！';
         }else{
             $msg = '请选择要删除的文章！';
         }
@@ -111,4 +111,38 @@ class ArticlesController extends Controller
         $this->jumpBox($msg, 
         Wave::app()->homeUrl.'/articles?page='.$page.'&category='.$category, 1);
     }
+
+    /**
+     * 上传文件
+     */
+    public function actionUpload()
+    {
+        $type = isset($_GET['type']) ? $_GET['type'] : 'files';
+        $projectPath = Wave::app()->projectPath;
+        $uploadPath = $projectPath.'uploadfile/'.$type;
+        $Common = new Common();
+        $Options = new Options();
+        $Multimedias = new Multimedias();
+        $baseurl = $Options->getSiteurl($Common).Wave::app()->request->baseUrl;
+        if(!is_dir($uploadPath)) mkdir($uploadPath, 0777);
+        $fn = $_GET['CKEditorFuncNum'];
+        if($type == 'images'){
+            $imgTypeArr = array('image/jpeg','image/jpg',
+                                'image/gif','image/png',
+                                'image/bmp','image/pjepg');
+            if(!in_array($_FILES['upload']['type'], $imgTypeArr)){
+                exit('图片格式错误！');
+            }else{
+                $imageSet = $Options->getImagesSet($Common);
+                require_once $projectPath.'extension/phpthumb/ThumbLib.inc.php';
+                $str = $Multimedias->uploadImg($Common,$type,
+                        $uploadPath,$baseurl,$imageSet,$_FILES,$fn);
+
+                exit($str);
+            }
+        }
+
+        
+    }
+
 }

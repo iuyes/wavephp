@@ -30,7 +30,7 @@ $config = array(
         )
     ),
     'session'=>array(
-        'prefix'            => 'blog',
+        'prefix'            => '',
         'timeout'           => 86400
     ),
     'memcache'=>array(
