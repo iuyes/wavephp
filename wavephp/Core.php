@@ -47,7 +47,7 @@ class Core
         unset($scriptArr);
 
         if(empty(self::$projectPath)) 
-            self::$projectPath = $_SERVER['DOCUMENT_ROOT'].ltrim($scriptName, '/').'/';
+            self::$projectPath = $_SERVER['DOCUMENT_ROOT'].$scriptName.'/';
         
         if(empty(self::$frameworkPath))
             self::$frameworkPath = dirname(__FILE__).'/';
