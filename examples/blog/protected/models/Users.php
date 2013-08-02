@@ -36,5 +36,18 @@ class Users
                     $username);
     }
 
+    /**
+     * 根据id获得用户名称
+     * @param class $Common     公共类模型
+     * @param int $id           用户id
+     * @return string           用户名
+     */
+    public function getUsername($Common, $id)
+    {
+        $arr = $Common->getOneData($this->tableName(),'user_login','id',$id);
+
+        return $arr['user_login'];
+    }
+
 }
 ?>

@@ -10,7 +10,7 @@
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/blog.css"/>
 <script type="text/javascript" src="<?=$baseUrl?>/resouce/js/jquery-1.4.3.min.js"></script>
 </head>
-<body class="home blog">
+<body class="single single-post postid-20 single-format-standard">
 <div id="wrap" class="clearfix">
     <div id="header-wrap">
         <div id="pre-header" class="clearfix">
@@ -27,11 +27,6 @@
     <div id="main-content" class="clearfix">
         <?php echo $content; ?>
     </div>
-    <div id="footer-wrap">
-        <footer id="footer">
-            <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeurl.'/site/slider');?>
-        </footer>
-    </div>
     <div id="copyright">
         © Copyright 2013 ·
         <a title="寞踪的技术博客" href="<?=$homeurl?>">寞踪的技术博客</a>
@@ -39,8 +34,6 @@
         <a rel="nofollow" target="_blank" title="WPExplorer" href="http://themeforest.net/user/WPExplorer?ref=wpexplorer">WPExplorer</a>
     </div>
 </div>
-<script type="text/javascript" src="<?=$baseUrl?>/resouce/js/isotope.min.js"></script>
-<script type="text/javascript" src="<?=$baseUrl?>/resouce/js/isotope_blog.js"></script>
 </body>
 </html>
 

@@ -36,20 +36,20 @@ class ArticlesController extends Controller
         $data['category'] = isset($_GET['category']) ? (int)$_GET['category'] : 0;
         $list = $Articles->getArticleList($Common, $data);
         $count = $Articles->getArticleCount($Common);
-        $pagebar = $Common->getAdminPageBar(Wave::app()->homeUrl.'/articles', 
-                            $count, $pagesize, $page);
+        $url = Wave::app()->homeUrl.'/articles/';
+        $pagebar = $Common->getAdminPageBar($url, $count, $pagesize, $page);
 
-        $this->render('index', array('list'=>$list,
-                                'catlist'=>$catlist, 
-                                'pagebar'=>$pagebar, 
-                                'page'=>$page,
-                                'category'=>$data['category']));
+        $this->render('index', array('list' => $list,
+                                'catlist'   => $catlist, 
+                                'pagebar'   => $pagebar, 
+                                'page'      => $page,
+                                'category'  => $data['category']));
     }
 
     /**
      * 添加、编辑文章页面
      */
-    public function actionModifyPage($id)
+    public function actionEdit($id)
     {
         $id = (int)$id;
         $Common = new Common();
@@ -60,10 +60,10 @@ class ArticlesController extends Controller
         $catlist = $Terms->getTermsList($Common, 'category');
         $arr = $Articles->getArticle($Common, $id);
 
-        $this->render('modifypage', array('arr'=>$arr, 
-                                    'catlist'=>$catlist, 
-                                    'page'=>$page,
-                                    'category'=>$category));
+        $this->render('edit', array('arr' => $arr, 
+                                    'catlist'   => $catlist, 
+                                    'page'      => $page,
+                                    'category'  => $category));
     }
 
     /**
@@ -141,8 +141,6 @@ class ArticlesController extends Controller
                 exit($str);
             }
         }
-
-        
     }
 
 }

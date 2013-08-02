@@ -47,7 +47,7 @@ $(function(){
                     <td><?=$value['comment_count']?></td>
                     <td><?=$value['modify_date']?></td>
                     <td>
-                        <a href="<?=$homeurl?>/articles/modifypage/<?=$value['id']?>?page=<?=$page?>&category=<?=$category?>">编辑</a> 
+                        <a href="<?=$homeurl?>/articles/edit/<?=$value['id']?>?page=<?=$page?>&category=<?=$category?>">编辑</a> 
                         |
                         <a href="<?=$homeurl?>/articles/delete/<?=$value['id']?>?page=<?=$page?>&category=<?=$category?>">删除</a>
                     </td>

@@ -3,7 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>博客</title>
-<?php $baseUrl=Wave::app()->request->baseUrl;?>
+<?php $baseUrl = Wave::app()->request->baseUrl;?>
+<?php $homeurl = Wave::app()->homeUrl;?>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/pure-min.css"/>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/public.css"/>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/admin.css"/>
@@ -22,7 +23,7 @@ $(function(){
 
     $.ajax({
         type: "GET",
-        url: "<?php echo Wave::app()->homeUrl.'/users/info';?>",
+        url: "<?php echo $homeurl.'/users/info';?>",
         data: 'rand='+Math.random(),
         dataType: "json",
         success: function(data){
@@ -35,7 +36,7 @@ $(function(){
     });
 
     var url = window.location.href;
-    var homeUrl = "<?=Wave::app()->homeUrl.'/'?>";
+    var homeUrl = "<?=$homeurl.'/'?>";
     var preurl = "http://"+"<?=Wave::app()->request->hostInfo?>"+homeUrl;
     var pathinfo = url.replace(preurl,"");
     var ptype = pathinfo.split("/");
@@ -47,40 +48,40 @@ $(function(){
 <div id="layout" class="pure-g-r">
     <div id="menu" class="pure-u">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="<?=Wave::app()->homeUrl?>">博客后台</a>
+            <a class="pure-menu-heading" href="<?=$homeurl?>">博客后台</a>
             <ul>
                 <li class="articles">
-                    <a href="<?=Wave::app()->homeUrl.'/articles'?>">文章</a>
+                    <a href="<?=$homeurl.'/articles'?>">文章</a>
                 </li>
                 <li class="categories">
-                    <a href="<?=Wave::app()->homeUrl.'/categories'?>">分类</a>
+                    <a href="<?=$homeurl.'/categories'?>">分类</a>
                 </li>
                 <li class="tags">
-                    <a href="<?=Wave::app()->homeUrl.'/tags'?>">标签</a>
+                    <a href="<?=$homeurl.'/tags'?>">标签</a>
                 </li>
                 <li class="multimedias">
-                    <a href="<?=Wave::app()->homeUrl.'/multimedias'?>">多媒体</a>
+                    <a href="<?=$homeurl.'/multimedias'?>">多媒体</a>
                 </li>
                 <li class="links">
-                    <a href="<?=Wave::app()->homeUrl.'/links'?>">链接</a>
+                    <a href="<?=$homeurl.'/links'?>">链接</a>
                 </li>
                 <li class="pages">
-                    <a href="<?=Wave::app()->homeUrl.'/pages'?>">页面</a>
+                    <a href="<?=$homeurl.'/pages'?>">页面</a>
                 </li>
                 <li class="comments">
-                    <a href="<?=Wave::app()->homeUrl.'/comments'?>">评论</a>
+                    <a href="<?=$homeurl.'/comments'?>">评论</a>
                 </li>
                 <li class="menu-item-divided exterior">
-                    <a href="<?=Wave::app()->homeUrl.'/exterior'?>">外观</a>
+                    <a href="<?=$homeurl.'/exterior'?>">外观</a>
                 </li>
                 <li class="plugs">
-                    <a href="<?=Wave::app()->homeUrl.'/plugs'?>">插件</a>
+                    <a href="<?=$homeurl.'/plugs'?>">插件</a>
                 </li>
                 <li class="users">
-                    <a href="<?=Wave::app()->homeUrl.'/users'?>">用户</a>
+                    <a href="<?=$homeurl.'/users'?>">用户</a>
                 </li>
                 <li class="setup">
-                    <a href="<?=Wave::app()->homeUrl.'/setup'?>">设置</a>
+                    <a href="<?=$homeurl.'/setup'?>">设置</a>
                 </li>
             </ul>
         </div>
@@ -96,10 +97,10 @@ $(function(){
                     <div class="inmenu left pure-menu pure-menu-open">
                         <ul>
                             <li class=" ">
-                                <a href="<?=Wave::app()->homeUrl.'/users/edit'?>">编辑我的个人资料</a>
+                                <a href="<?=$homeurl.'/users/edit'?>">编辑我的个人资料</a>
                             </li>
                             <li class=" ">
-                                <a href="<?=Wave::app()->homeUrl.'/site/logout'?>">登出</a>
+                                <a href="<?=$homeurl.'/site/logout'?>">登出</a>
                             </li>
                         </ul>
                     </div>

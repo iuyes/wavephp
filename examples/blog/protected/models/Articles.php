@@ -31,7 +31,7 @@ class Articles
                 $relationships_id_arr[] = $v['term_taxonomy_id'];
             }
             $relationships_id = implode(',', $relationships_id_arr);
-            $category = $tags_name = array();
+            $cate = $category = $tags_name = array();
             if(!empty($relationships_id)){
                 $sql = "SELECT tax.term_id,tax.taxonomy,terms.`name` 
                         FROM term_taxonomy tax 
@@ -40,14 +40,18 @@ class Articles
                         WHERE tax.term_taxonomy_id IN($relationships_id)";
                 $taxonomy = $Common->getSqlList($sql);
                 foreach ($taxonomy as $k => $v) {
-                    if($v['taxonomy'] == 'category') 
+                    if($v['taxonomy'] == 'category'){
                         $category[] = $v['term_id'];
-                    else 
+                        $cate[$k]['id'] = $v['term_id'];
+                        $cate[$k]['name'] = $v['name'];
+                    } else 
                         $tags_name[] = $v['name'];
                 }
             }
             $arr['category'] = $category;
+            $arr['cate'] = $cate;
             $arr['tags'] = implode(',', $tags_name);
+            $arr['tag_names'] = $tags_name;
         }
 
         return $arr;
@@ -56,33 +60,50 @@ class Articles
     /**
      * 获得文章总数量
      * @param class $Common     公共类模型
+     * @param int $user_id      用户id
      * @return int              数量
      */
-    public function getArticleCount($Common)
+    public function getArticleCount($Common, $user_id = 0)
     {
-        return $Common->getCount($this->tableName());
+        if(!empty($user_id)){
+            $sql = "SELECT count(*) count FROM articles
+                    LEFT JOIN users ON articles.add_author=users.id
+                    WHERE users.id='$user_id'";
+            $arr = $Common->getSqlOne($sql);
+
+            return $arr['count'];
+        }else
+            return $Common->getCount($this->tableName());
     }
 
     /**
      * 获得文章列表
      * @param class $Common     公共类模型
      * @param array $data       条件数组
+     * @param string $content   是否查询内同
+     * @param int $user_id      用户id
      * @return array            文章数组
      */
-    public function getArticleList($Common, $data)
+    public function getArticleList($Common, $data, $content = null, $user_id = 0)
     {
 
         $start = $data['start'];
         $limit = $data['limit'];
+        $field = $where = '';
+        if(!empty($content)) $field = 'articles.content,';
+        if(!empty($user_id)) $where = "WHERE users.id='$user_id'";
         $sql = "SELECT 
                 articles.id,
                 articles.title,
+                $field
                 articles.modify_date,
                 articles.guid,
                 articles.comment_count,
-                users.user_login 
+                users.user_login,
+                users.id user_id 
                 FROM articles
                 LEFT JOIN users ON articles.add_author=users.id
+                $where
                 ";
         if(!empty($data['category'])){
             $term_taxonomy = $Common->getOneData('term_taxonomy', 

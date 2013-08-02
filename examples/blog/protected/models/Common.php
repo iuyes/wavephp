@@ -225,6 +225,59 @@ class Common
         return $bar;
     }
 
+    /**
+     * 分页
+     * @param string $url       地址
+     * @param string $otherurl  其他地址
+     * @param int $allcount     总数
+     * @param int $pagesize     页显示数量
+     * @param int $page         当前页
+     * @return string           分页
+     */
+    public function getPageBar($url, $otherurl = null, $allcount, $pagesize, $page)
+    {
+        $totalPage = ceil($allcount/$pagesize);
+        $allPage = 20;
+        $offerPage = ceil($allPage/2);
+        $left = 1;
+        if($totalPage > $allPage){
+            if($page > $offerPage) {
+                $left = $page - $offerPage;
+                $right = $page + $offerPage;
+                if($right > $totalPage) {
+                    $left = $left + $totalPage - $right;
+                    $right = $totalPage;
+                }
+            }else{
+                $right = $allPage;
+            }
+        }else{
+            $right = $totalPage;
+        }
+        $pagestr = '';
+        for($i = $left; $i <= $right; $i++) { 
+            if($i == $page){
+                $pagestr .= '<span class="current outer">
+                                <span class="inner">'.$i.'</span>
+                            </span>';
+            }else{
+                $page_url = !empty($otherurl) ? '&page='.$i : '?page='.$i;
+                $pagestr .= '<a class="inactive" href="'.$url.$otherurl.$page_url.'">
+                                <span class="inner">'.$i.'</span>
+                            </a>';
+            }
+        }
+        $bar = '<div class="page-pagination">
+                    <div class="page-pagination-inner clearfix">
+                        <div class="page-of-page">
+                        <span class="inner">'.$page.' of '.$totalPage.'</span>
+                    </div>
+                    '.$pagestr.'
+                </div>';
+
+        return $bar;
+    }
+
 }
 
 ?>

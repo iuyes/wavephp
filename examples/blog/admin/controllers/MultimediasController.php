@@ -40,8 +40,8 @@ class MultimediasController extends Controller
                                     .'/small/'.$value['save_name'];
         }
         $count = $Multimedias->getMultimediaCount($Common);
-        $pagebar = $Common->getAdminPageBar(Wave::app()->homeUrl.'/multimedias', 
-                            $count, $pagesize, $page);
+        $url = Wave::app()->homeUrl.'/multimedias';
+        $pagebar = $Common->getAdminPageBar($url, $count, $pagesize, $page);
 
         $this->render('index', array('list'=>$list,'page'=>$page,'pagebar'=>$pagebar));
     }

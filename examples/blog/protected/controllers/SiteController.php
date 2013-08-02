@@ -15,41 +15,88 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $arr = Wave::app()->database->db->getOne("select user_login from users");
-        print_r($arr);
-
-        echo "<br>";
-
-        $arr2 = Wave::app()->database->db2->getOne("select username from joke_user");
-        print_r($arr2);
-
-        echo "<br>";
-
-        echo Wave::app()->projectPath."<br>";
-
-        echo Wave::app()->request->hostInfo."<br>";
-
-        echo Wave::app()->request->pathInfo."<br>";
-
-        echo Wave::app()->homeUrl."<br>";
-
-        echo Wave::app()->request->baseUrl."<br>";
-
-        // spl_autoload_unregister(array('WaveBase','loader'));
-        // spl_autoload_register(array('WaveBase','loader'));
-
+        $Common = new Common();
+        $Articles = new Articles();
+        $Terms = new Terms();
         $Users = new Users();
+        $catlist = $Terms->getTermsList($Common, 'category');
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pagesize = 15;
+        $data = array();
+        $data['start'] = ($page-1)*$pagesize;
+        $data['limit'] = $pagesize;
+        $data['category'] = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+        $author = 0;
+        $username = $otherurl = '';
+        if(isset($_GET['author'])) {
+            $author = (int)$_GET['author'];
+            $username = $Users->getUsername($Common, $author);
+        }
+        $list = $Articles->getArticleList($Common, $data, 1, $author);
+        foreach ($list as $key => $value) {
+            $list[$key]['content'] = mb_substr($value['content'],0,250,'utf-8');
+        }
+        $count = $Articles->getArticleCount($Common, $author);
+        
+        $url = Wave::app()->homeUrl.'/site/';
+        if(!empty($author)) $otherurl = '?author='.$author;
+        $pagebar = $Common->getPageBar($url, $otherurl, $count, $pagesize, $page);
 
-        echo "User model 加载成功！<br>";
+        $this->render('index', array('list' => $list,
+                                'catlist'   => $catlist, 
+                                'page'      => $page,
+                                'category'  => $data['category'],
+                                'username'  => $username,
+                                'pagebar'   => $pagebar));
+    }
 
-        $username = Wave::app()->user->getState('username');
+    /**
+     * 文章查看页
+     */
+    public function actionArticle()
+    {
+        $id = (int)$_GET['p'];
+        $Common = new Common();
+        $Users = new Users();
+        $Articles = new Articles();
+        $arr = $Articles->getArticle($Common, $id);
+        $add_username = $Users->getUsername($Common, $arr['add_author']);
 
-        // $this->layout='index';
-        $this->render('index', array('username'=>$username));
+        $this->layout = 'index';
+        $this->render('article', array('arr' => $arr, 'add_username' => $add_username));
+    }
 
-        // echo "<pre>";
-        // print_r(get_included_files());
+    /**
+     * 评论
+     */
+    public function actionComment()
+    {
+        $this->layout = 'no';
+        $this->render('comment');
+    }
 
+    /**
+     * 右侧slider
+     */
+    public function actionSidebar()
+    {
+        $this->layout = 'no';
+        $Common = new Common();
+        $Terms = new Terms();
+        $taglist = $Terms->getTermsList($Common, 'post_tag');
+        $catelist = $Terms->getTermsList($Common, 'category');
+
+        $this->render('sidebar', array('taglist' => $taglist,
+                                       'catelist'=> $catelist));
+    }
+
+    /**
+     * 底部slider
+     */
+    public function actionSlider()
+    {
+        $this->layout = 'no';
+        $this->render('slider');
     }
 
     /**
@@ -68,11 +115,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Wave::app()->user->logout();
-    }
-
-    public function actionExportCode()
-    {
-        echo Wave::app()->user->getState('verifycode');
     }
 
 }
