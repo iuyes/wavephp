@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 31 日 16:00
+-- 生成日期: 2013 年 08 月 02 日 19:22
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -46,15 +46,15 @@ CREATE TABLE IF NOT EXISTS `articles` (
   KEY `type_status_date` (`post_type`,`status`,`add_date`,`id`),
   KEY `post_parent` (`post_parent`),
   KEY `post_author` (`add_author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
 -- 转存表中的数据 `articles`
 --
 
 INSERT INTO `articles` (`id`, `add_author`, `add_date`, `content`, `title`, `post_excerpt`, `status`, `comment_status`, `modify_date`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
-(1, 1, '2013-07-30 13:52:09', '<p>sssssssssssssssssssssssssssssss222</p>\r\n', 'ssssssssssssssaaaaaaaaaa', '', 'publish', 'open', '2013-07-30 17:47:55', 0, '', 0, 'post', '', 0),
-(2, 1, '2013-07-30 14:45:02', '<p>wwwwwwwwwwwwwwwwwwwwwwwww</p>\r\n', 'eeeeeeeeeeeeeeeee', '', 'publish', 'open', '2013-07-30 17:47:20', 0, '', 0, 'post', '', 0),
+(1, 1, '2013-07-30 13:52:09', '<p>从这上面<a href="http://www.bananawolf.com/html/2011/06/628.html">http://www.bananawolf.com/html/2011/06/628.html</a>转载</p>\r\n\r\n<p>《Android SDK 开发范例大全》</p>\r\n\r\n<p>这本书上在安装开发环境方面讲的不是很详细，而且只有Win上的环境配置方法，没有Ubuntu上的环境配置方法。现代我们就来看看Ubuntu上怎么安装Eclipse+Android的开发环境。</p>\r\n\r\n<p>1. 安装JDK6</p>\r\n\r\n<p>先确认已经添加了软件源，在系统－系统管理－软件源－其它软件，确保已经选中http://archive.canonical.com/ubuntu lucid partner这个源。</p>\r\n\r\n<pre>\r\nsudo apt-get install sun-java6-jdk</pre>\r\n\r\n<p>设置系统环境变量</p>\r\n\r\n<pre>\r\nexport JAVA_HOME=/usr/lib/jvm/java-6-sun    (根据具体的安装路径)\r\nexport ANDROID_JAVA_HOME=$JAVA_HOME</pre>\r\n\r\n<p>2. 安装Eclipse</p>\r\n\r\n<p>在应用程序－Ubuntu软件中心 中查找安装</p>\r\n\r\n<p>3.安装Android SDK</p>\r\n\r\n<p>在<a href="http://developer.android.com/sdk">http://developer.android.com/sdk</a>上下载<a href="http://dl.google.com/android/android-sdk_r11-linux_x86.tgz">android-sdk_r11-linux_x86.tgz</a><br />\r\n然后解压到/opt下</p>\r\n\r\n<pre>\r\nsudo tar xzvf android-sdk_r11-linux_x86.tgz -C /opt\r\n# 修改目录权限，\r\nsudo chown -R root:root /opt/android-sdk-linux_x86   root为你当前用户或者\r\nsudo chmod 777 /opt/android-sdk-linux_x86</pre>\r\n\r\n<p>添加PATH路径</p>\r\n\r\n<pre>\r\nsudo gedit ~/.bashrc</pre>\r\n\r\n<p>在文件最后输入</p>\r\n\r\n<pre>\r\n# android sdk\r\nexport PATH=${PATH}：/opt/android-sdk-linux_x86/tools</pre>\r\n\r\n<p>4.安装ADT插件<br />\r\n打开上面安装的Eclipse-help-Install New Software</p>\r\n\r\n<p>work width为http://dl-ssl.google.com/Android/eclipse/<br />\r\n选择安装android development tools</p>\r\n\r\n<p>如果安装过程中出现错误：The operation cannot be completed. See the details<br />\r\n则表明需要安装WST，输入地址http://download.eclipse.org/releases/galileo/<br />\r\n选择最后一项的最后一个子项WST即可，如果安装WST的过程出现错误：An error occurred while installing the items<br />\r\nsession context was:(profile=PlatformProfile, phase=org.eclipse.equinox.internal.provisional.p2.engine.phases.Install, operand=null &ndash;&gt; [R]org.eclipse.ant.ui 3.4.1.v20090901_r351, action=org.eclipse.equinox.internal.p2.touchpoint.eclipse.actions.InstallBundleAction).<br />\r\nThe artifact file for osgi.bundle,org.eclipse.ant.ui,3.4.1.v20090901_r351 was not found.<br />\r\n有可能没有安装Eclipse 的eclipse-pde或eclipse-jdt插件</p>\r\n\r\n<pre>\r\nsudo apt-get install eclipse-pde\r\nsudo apt-get install eclipse-jdt</pre>\r\n\r\n<p>5.设置SDK－HOME<br />\r\n在Eclipse 中window-Preferences-&gt;android中浏览选择Android SDK的安装目录即/opt/android-sdk-linux_x86</p>\r\n\r\n<p>更新Android SDK Tools，<br />\r\n在Eclipse &ndash; window &ndash; Android SDK and AVD Manager &ndash; Installed packages 选择 Android SDK Tools, revision 11点击Update All</p>\r\n\r\n<p>至此，Eclipse+Android 环境基本配置完成。</p>\r\n', 'Ubuntu上怎么安装Eclipse Android 开发环境', '', 'publish', 'open', '2013-08-02 16:53:55', 0, '', 0, 'post', '', 0),
+(2, 1, '2013-07-30 14:45:02', '<p>wwwwwwwwwwwwwwwwwwwwwwwww</p>\r\n', 'eeeeeeeeeeeeeeeee', '', 'publish', 'open', '2013-08-02 16:59:26', 0, '', 0, 'post', '', 0),
 (4, 1, '2013-07-30 15:51:25', '<p>wwwwwwwwwerafasdfsssssss</p>\r\n', 'sssssswwwwwwww', '', 'publish', 'open', '2013-07-30 17:47:12', 0, '', 0, 'post', '', 0),
 (5, 1, '2013-07-30 16:06:37', '<p>sssssswwwwwwwwwwwww</p>\r\n', 'dddddddddaaaaaaa', '', 'publish', 'open', '2013-07-30 16:06:37', 0, '', 0, 'post', '', 0),
 (12, 1, '2013-07-30 16:18:11', '<p>fasdfsadfsdfsdssss</p>\r\n', 'fffffffff', '', 'publish', 'open', '2013-07-30 18:23:20', 0, '', 0, 'post', '', 0),
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `multimedias` (
   `save_name` varchar(255) DEFAULT NULL,
   `adddate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `multimedias`
@@ -224,6 +224,7 @@ INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
 (29, 29),
 (30, 31),
 (1, 32),
+(2, 32),
 (26, 32),
 (5, 33),
 (12, 33),
@@ -233,6 +234,7 @@ INSERT INTO `term_relationships` (`article_id`, `term_taxonomy_id`) VALUES
 (19, 33),
 (20, 33),
 (24, 33),
+(1, 42),
 (2, 42),
 (4, 42),
 (18, 42),
@@ -292,7 +294,7 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (29, 28, 'post_tag', '', 0, 1),
 (30, 29, 'post_tag', '', 0, 0),
 (31, 30, 'post_tag', '', 0, 1),
-(32, 31, 'post_tag', '', 0, 2),
+(32, 31, 'post_tag', '', 0, 3),
 (33, 32, 'post_tag', '', 0, 8),
 (34, 33, 'post_tag', '', 0, 0),
 (35, 34, 'post_tag', '', 0, 0),
@@ -301,7 +303,7 @@ INSERT INTO `term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `descrip
 (38, 37, 'post_tag', '', 0, 0),
 (39, 38, 'post_tag', '', 0, 0),
 (40, 39, 'post_tag', '', 0, 0),
-(42, 41, 'post_tag', '', 0, 7),
+(42, 41, 'post_tag', '', 0, 8),
 (45, 44, 'category', '', 0, 1),
 (50, 49, 'category', '', 0, 6),
 (51, 50, 'post_tag', '', 0, 0);
