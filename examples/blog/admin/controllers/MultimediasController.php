@@ -65,7 +65,7 @@ class MultimediasController extends Controller
         }
 
         $this->jumpBox($msg, 
-        Wave::app()->homeUrl.'/multimedias?page='.$page, 1);
+        Wave::app()->homeUrl.'/multimedias/?page='.$page, 1);
     }
 
 }

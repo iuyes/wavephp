@@ -88,7 +88,7 @@ class ArticlesController extends Controller
         }
 
         $this->jumpBox($msg, 
-        Wave::app()->homeUrl.'/articles?page='.$page.'&category='.$category, 1);
+        Wave::app()->homeUrl.'/articles/?page='.$page.'&category='.$category, 1);
     }
 
     /**
@@ -109,7 +109,7 @@ class ArticlesController extends Controller
         }
 
         $this->jumpBox($msg, 
-        Wave::app()->homeUrl.'/articles?page='.$page.'&category='.$category, 1);
+        Wave::app()->homeUrl.'/articles/?page='.$page.'&category='.$category, 1);
     }
 
     /**
