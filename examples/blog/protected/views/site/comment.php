@@ -23,7 +23,7 @@
                     <textarea rows="10" aria-required="true" name="comment" id="comment"></textarea>
                 </p>                                                
                 <p class="form-submit">
-                    <input type="submit" value="Submit Comment" id="submit" name="submit">
+                    <input type="submit" value="提交评论" id="submit" name="submit">
                     <input type="hidden" id="comment_post_ID" value="20" name="comment_post_ID">
                     <input type="hidden" value="0" id="comment_parent" name="comment_parent">
                 </p>

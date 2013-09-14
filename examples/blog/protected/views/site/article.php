@@ -1,4 +1,4 @@
-<?php $homeurl = Wave::app()->homeUrl;?>
+<?php $homeUrl = Wave::app()->homeUrl;?>
 <div id="single-post-content" class="sidebar-bg container clearfix">
     <div id="post" class="clearfix">
         <header id="post-header">
@@ -10,11 +10,11 @@
                 </li>
                 <li>
                     <strong>By:</strong>
-                    <a rel="author" title="由 <?=$add_username?> 发布" href="<?=$homeurl?>?author=<?=$arr['add_author']?>"><?=$add_username?></a>
+                    <a rel="author" title="由 <?=$add_username?> 发布" href="<?=$homeUrl?>?author=<?=$arr['add_author']?>"><?=$add_username?></a>
                 </li>
                 <li class="comment-scroll">
                     <strong>With:</strong>
-                    <a class="comments-link" title="<?=$arr['title']?>上的评论" href="<?=$homeurl?>/site/article/?p=<?=$arr['id']?>#respond">
+                    <a class="comments-link" title="<?=$arr['title']?>上的评论" href="<?=$homeUrl?>/site/article/?p=<?=$arr['id']?>#respond">
                         <?=$arr['comment_count']?> Comments
                     </a>
                 </li>
@@ -31,7 +31,7 @@
             <ul>
                 <li>分类：</li>
                 <?php foreach ($arr['cate'] as $key => $value):?>
-                    <li><a href="<?=$homeurl?>?cat=<?=$value['id']?>"><?=$value['name']?></a></li>
+                    <li><a href="<?=$homeUrl?>?category=<?=$value['id']?>"><?=$value['name']?></a></li>
                 <?php endforeach;?>
             </ul>
         </div>
@@ -39,13 +39,13 @@
             <ul>
                 <li>标签：</li>
                 <?php foreach ($arr['tag_names'] as $key => $value):?>
-                    <li><a rel="tag" href="<?=$homeurl?>?tag=<?=$value?>"><?=$value?></a></li>
+                    <li><a rel="tag" href="<?=$homeUrl?>?tag=<?=$value?>"><?=$value?></a></li>
                 <?php endforeach;?>  
             </ul>
         </div>
 
-        <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeurl.'/site/comment/?p=<?=$arr["id"]?>');?>
+        <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeUrl.'/site/comment/?p=<?=$arr["id"]?>');?>
     </div>
 
-    <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeurl.'/site/sidebar');?>
+    <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeUrl.'/site/sidebar');?>
 </div>

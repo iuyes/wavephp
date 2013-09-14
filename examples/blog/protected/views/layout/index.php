@@ -19,7 +19,7 @@
         <header id="header" class="clearfix">
             <div id="logo">
                 <h2>
-                    <a rel="home" title="" href="<?=$homeurl?>">WAVEPHP框架博客</a>
+                    <a rel="home" title="" href="<?=$homeUrl?>">WAVEPHP框架博客</a>
                 </h2>
             </div>
         </header>
@@ -29,9 +29,9 @@
     </div>
     <div id="copyright">
         © Copyright 2013 ·
-        <a title="寞踪的技术博客" href="<?=$homeurl?>">寞踪的技术博客</a>
+        <a title="寞踪的技术博客" href="<?=$homeUrl?>">寞踪的技术博客</a>
         - Theme by
-        <a rel="nofollow" target="_blank" title="WPExplorer" href="http://themeforest.net/user/WPExplorer?ref=wpexplorer">WPExplorer</a>
+        <a rel="nofollow" target="_blank" title="寞踪" href="http://xpmyblog.sinaapp.com/">寞踪</a>
     </div>
 </div>
 </body>

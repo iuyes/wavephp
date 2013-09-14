@@ -48,7 +48,7 @@ class SiteController extends Controller
     public function actionLoging()
     {
         $Common = new Common();
-        $data = $_POST;
+        $data = $Common->getFilter($_POST);
         if(empty($data['user_login']))
             $Common->exportResult(false, '请输入用户名！');
 
@@ -56,7 +56,6 @@ class SiteController extends Controller
             $Common->exportResult(false, '请输入密码！');
         
         $Users = new Users();
-        $data = $Common->getFilter($data);
         $user = $Users->getUser($Common, $data['user_login']);
         $password = $Users->hashPassword($data['user_pass']);
         if(empty($user)){

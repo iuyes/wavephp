@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>博客</title>
 <?php $baseUrl = Wave::app()->request->baseUrl;?>
-<?php $homeurl = Wave::app()->homeUrl;?>
+<?php $homeUrl = Wave::app()->homeUrl;?>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/pure-min.css"/>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/public.css"/>
 <link type="text/css" rel="stylesheet" href="<?=$baseUrl?>/resouce/css/blog.css"/>
@@ -19,7 +19,7 @@
         <header id="header" class="clearfix">
             <div id="logo">
                 <h2>
-                    <a rel="home" title="" href="<?=$homeurl?>">WAVEPHP框架博客</a>
+                    <a rel="home" title="" href="<?=$homeUrl?>">WAVEPHP框架博客</a>
                 </h2>
             </div>
         </header>
@@ -29,14 +29,14 @@
     </div>
     <div id="footer-wrap">
         <footer id="footer">
-            <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeurl.'/site/slider');?>
+            <?php echo file_get_contents('http://'.Wave::app()->request->hostInfo.$homeUrl.'/site/slider');?>
         </footer>
     </div>
     <div id="copyright">
         © Copyright 2013 ·
-        <a title="寞踪的技术博客" href="<?=$homeurl?>">寞踪的技术博客</a>
+        <a title="寞踪的技术博客" href="<?=$homeUrl?>">寞踪的技术博客</a>
         - Theme by
-        <a rel="nofollow" target="_blank" title="WPExplorer" href="http://themeforest.net/user/WPExplorer?ref=wpexplorer">WPExplorer</a>
+        <a rel="nofollow" target="_blank" title="寞踪" href="http://xpmyblog.sinaapp.com/">寞踪</a>
     </div>
 </div>
 <script type="text/javascript" src="<?=$baseUrl?>/resouce/js/isotope.min.js"></script>

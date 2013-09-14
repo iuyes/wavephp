@@ -21,11 +21,12 @@ class SiteController extends Controller
         $Users = new Users();
         $catlist = $Terms->getTermsList($Common, 'category');
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $pagesize = 15;
+        $pagesize = 20;
         $data = array();
         $data['start'] = ($page-1)*$pagesize;
         $data['limit'] = $pagesize;
         $data['category'] = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+        $data['tag'] = isset($_GET['tag']) ? $_GET['tag'] : '';
         $author = 0;
         $username = $otherurl = '';
         if(isset($_GET['author'])) {
@@ -33,16 +34,18 @@ class SiteController extends Controller
             $username = $Users->getUsername($Common, $author);
         }
         $list = $Articles->getArticleList($Common, $data, 1, $author);
-        foreach ($list as $key => $value) {
-            $list[$key]['content'] = mb_substr($value['content'],0,250,'utf-8');
+        foreach ($list['list'] as $key => $value) {
+            $list['list'][$key]['content'] = mb_substr($value['content'],0,250,'utf-8');
         }
-        $count = $Articles->getArticleCount($Common, $author);
+        $count = $list['count'];
         
         $url = Wave::app()->homeUrl.'/site/';
         if(!empty($author)) $otherurl = '?author='.$author;
+        if(!empty($data['category'])) $otherurl = '?category='.$data['category'];
+        if(!empty($data['tag'])) $otherurl = '?tag='.$data['tag'];
         $pagebar = $Common->getPageBar($url, $otherurl, $count, $pagesize, $page);
 
-        $this->render('index', array('list' => $list,
+        $this->render('index', array('list' => $list['list'],
                                 'catlist'   => $catlist, 
                                 'page'      => $page,
                                 'category'  => $data['category'],
@@ -82,12 +85,16 @@ class SiteController extends Controller
     {
         $this->layout = 'no';
         $Common = new Common();
+        $Articles = new Articles();
         $Terms = new Terms();
         $taglist = $Terms->getTermsList($Common, 'post_tag');
         $catelist = $Terms->getTermsList($Common, 'category');
+        $list = $Articles->getArticleRecent($Common, 10);
 
-        $this->render('sidebar', array('taglist' => $taglist,
-                                       'catelist'=> $catelist));
+        $render = array('taglist'   => $taglist,
+                        'catelist'  => $catelist,
+                        'list'      => $list);
+        $this->render('sidebar', $render);
     }
 
     /**
@@ -95,8 +102,15 @@ class SiteController extends Controller
      */
     public function actionSlider()
     {
+        $Common = new Common();
+        $Terms = new Terms();
+        $taglist = $Terms->getTermsList($Common, 'post_tag');
+        $catelist = $Terms->getTermsList($Common, 'category');
+        
         $this->layout = 'no';
-        $this->render('slider');
+        $render = array('taglist'   => $taglist,
+                        'catelist'  => $catelist);
+        $this->render('slider', $render);
     }
 
     /**

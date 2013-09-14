@@ -35,11 +35,11 @@ class ArticlesController extends Controller
         $data['limit'] = $pagesize;
         $data['category'] = isset($_GET['category']) ? (int)$_GET['category'] : 0;
         $list = $Articles->getArticleList($Common, $data);
-        $count = $Articles->getArticleCount($Common);
+        $count = $list['count'];
         $url = Wave::app()->homeUrl.'/articles/';
         $pagebar = $Common->getAdminPageBar($url, $count, $pagesize, $page);
 
-        $this->render('index', array('list' => $list,
+        $this->render('index', array('list' => $list['list'],
                                 'catlist'   => $catlist, 
                                 'pagebar'   => $pagebar, 
                                 'page'      => $page,

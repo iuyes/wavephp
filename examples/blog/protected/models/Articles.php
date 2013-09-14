@@ -105,22 +105,40 @@ class Articles
                 LEFT JOIN users ON articles.add_author=users.id
                 $where
                 ";
+        $wsql = '';
+        $term_taxonomy = array();
         if(!empty($data['category'])){
             $term_taxonomy = $Common->getOneData('term_taxonomy', 
                             'term_taxonomy_id', 
                             'term_id', 
                             $data['category']);
-            if(!empty($term_taxonomy['term_taxonomy_id'])){
-                $term_taxonomy_id = $term_taxonomy['term_taxonomy_id'];
-                $sql .= " LEFT JOIN term_relationships rela
-                        ON articles.id=rela.article_id
-                        WHERE rela.term_taxonomy_id='$term_taxonomy_id'";
-            }
         }
-        $sql .= " ORDER BY articles.id DESC
+        if(!empty($data['tag'])){
+            $tagsql = "SELECT tax.term_taxonomy_id FROM `terms` 
+                    LEFT JOIN term_taxonomy tax
+                    ON terms.term_id=tax.term_id
+                    WHERE tax.taxonomy='post_tag' AND
+                    terms.`name` = '".$data['tag']."'";
+            $term_taxonomy = $Common->getSqlOne($tagsql);
+        }
+        if(!empty($term_taxonomy['term_taxonomy_id'])){
+            $term_taxonomy_id = $term_taxonomy['term_taxonomy_id'];
+            $wsql = " LEFT JOIN term_relationships rela
+                    ON articles.id=rela.article_id
+                    WHERE rela.term_taxonomy_id='$term_taxonomy_id'";
+        }
+
+        $countsql = "SELECT count(*) count
+                     FROM articles
+                     LEFT JOIN users ON articles.add_author=users.id
+                     $where".$wsql;
+        $countarr = $Common->getSqlOne($countsql);
+        $arr['count'] = $countarr['count'];
+
+        $sql .= $wsql." ORDER BY articles.id DESC
                   LIMIT $start,$limit";
-        $arr = $Common->getSqlList($sql);
-        foreach ($arr as $key => $value) {
+        $arr['list'] = $Common->getSqlList($sql);
+        foreach ($arr['list'] as $key => $value) {
             $relationships = $Common->getAllData('term_relationships', 
                             'term_taxonomy_id', 
                             'article_id', $value['id']);
@@ -130,6 +148,7 @@ class Articles
             }
             $relationships_id = implode(',', $relationships_id_arr);
             $category_name = $tags_name = array();
+            $index_category = $index_tags = array();
             if(!empty($relationships_id)){
                 $sql = "SELECT tax.term_id,tax.taxonomy,terms.`name` 
                         FROM term_taxonomy tax 
@@ -138,17 +157,37 @@ class Articles
                         WHERE tax.term_taxonomy_id IN($relationships_id)";
                 $taxonomy = $Common->getSqlList($sql);
                 foreach ($taxonomy as $k => $v) {
-                    if($v['taxonomy'] == 'category') 
-                        $category_name[] = $v['name'];
-                    else 
-                        $tags_name[] = $v['name'];
+                    if($v['taxonomy'] == 'category') {
+                        $index_category[$k]['term_id'] = $v['term_id'];
+                        $index_category[$k]['name'] = $category_name[] = $v['name'];
+                    }else{
+                        $index_tags[$k]['name'] = $tags_name[] = $v['name'];
+                    }
                 }
             }
-            $arr[$key]['category'] = implode(',', $category_name);
-            $arr[$key]['tags'] = implode(',', $tags_name);
+            $arr['list'][$key]['category'] = implode(',', $category_name);
+            $arr['list'][$key]['tags'] = implode(',', $tags_name);
+            $arr['list'][$key]['index_category'] = $index_category;
+            $arr['list'][$key]['index_tags'] = $index_tags;
         }
 
         return $arr;
+    }
+
+    /**
+     * 近期文章
+     * @param class $Common     公共类模型
+     * @param array $limit      文章数量
+     * @return array            文章数组
+     */
+    public function getArticleRecent($Common, $limit)
+    {
+        $sql = "SELECT articles.id,articles.title 
+                 FROM articles
+                 ORDER BY id DESC
+                 LIMIT $limit";
+        
+        return $Common->getSqlList($sql);
     }
 
     /**

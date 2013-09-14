@@ -1,4 +1,4 @@
-<?php $homeurl = Wave::app()->homeUrl;?>
+<?php $homeUrl = Wave::app()->homeUrl;?>
 <?php if(!empty($username)):?>
     <header id="page-heading">
         <h1>Posts by: xpmozong</h1>
@@ -11,7 +11,7 @@
             <div class="entry-text clearfix">
                 <header>
                     <h2>
-                        <a title="test" href="<?=$homeurl.'/site/article'?>/?p=<?=$value['id']?>"><?=$value['title']?></a>
+                        <a title="test" href="<?=$homeUrl.'/site/article'?>/?p=<?=$value['id']?>"><?=$value['title']?></a>
                     </h2>
                 </header>
                 <?=$value['content']?>
@@ -22,15 +22,35 @@
                     </li>
                     <li>
                         <strong>By:</strong>
-                        <a rel="author" title="由 <?=$value['user_login']?> 发布" href="<?=$homeurl.'/site/index'?>/?author=<?=$value['user_id']?>">
+                        <a rel="author" title="由 <?=$value['user_login']?> 发布" href="<?=$homeUrl.'/site/index'?>/?author=<?=$value['user_id']?>">
                             <?=$value['user_login']?>
                         </a>
                     </li>
                     <li class="comment-scroll">
                         <strong>With:</strong>
-                        <a class="comments-link" title="《test》上的评论" href="<?=$homeurl.'/site/article'?>/?p=<?=$value['id']?>#respond">
+                        <a class="comments-link" title="《<?=$value['title']?>》上的评论" href="<?=$homeUrl.'/site/article'?>/?p=<?=$value['id']?>#respond">
                             <?=$value['comment_count']?> Comments
                         </a>
+                    </li>
+                    <li>
+                        <strong>Category:</strong>
+                        <?php 
+                            $catarr = array();
+                            foreach ($value['index_category'] as $k => $v){
+                                $catarr[] = '<a href="'.$homeUrl.'?category='.$v['term_id'].'">'.$v['name'].'</a>';
+                            }
+                            echo implode(' | ', $catarr);
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Tags:</strong>
+                        <?php 
+                            $tagarr = array();
+                            foreach ($value['index_tags'] as $k => $v){
+                                $tagarr[] = '<a href="'.$homeUrl.'?tag='.$v['name'].'">'.$v['name'].'</a>';
+                            }
+                            echo implode(' | ', $tagarr);
+                        ?>
                     </li>
                 </ul>
             </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 02 日 19:22
+-- 生成日期: 2013 年 09 月 14 日 16:54
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -76,6 +76,31 @@ INSERT INTO `articles` (`id`, `add_author`, `add_date`, `content`, `title`, `pos
 (29, 1, '2013-07-30 18:31:47', '<p>dfasdfasdf</p>\r\n', 'sdfs', '', 'publish', 'open', '2013-07-31 13:46:51', 0, '', 0, 'post', '', 0),
 (30, 1, '2013-07-30 18:34:26', '<p>sdfsdfsd</p>\r\n', 'sdfsd', '', 'publish', 'open', '2013-07-31 13:46:45', 0, '', 0, 'post', '', 0),
 (31, 1, '2013-07-31 13:45:25', '<p><img alt="55555" src="http://localhost//wavephp/examples/blog/uploadfile/images/medium/1375249478.jpg" style="height:300px; width:225px" /></p>\r\n\r\n<p>图片测试</p>\r\n', '小奶', '', 'publish', 'open', '2013-07-31 13:46:34', 0, '', 0, 'post', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `comment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `comment_author` tinytext NOT NULL,
+  `comment_author_email` varchar(100) NOT NULL DEFAULT '',
+  `comment_author_url` varchar(200) NOT NULL DEFAULT '',
+  `comment_author_ip` varchar(100) NOT NULL DEFAULT '',
+  `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment_content` text NOT NULL,
+  `comment_karma` int(11) NOT NULL DEFAULT '0',
+  `comment_approved` tinyint(1) NOT NULL DEFAULT '0',
+  `comment_agent` varchar(255) NOT NULL DEFAULT '',
+  `comment_type` varchar(20) NOT NULL DEFAULT '',
+  `comment_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`comment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
