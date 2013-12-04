@@ -2,6 +2,8 @@ wavephp
 =======
 
 一个轻量级的MVC PHP框架，抛去复杂的架构，使框架更加简洁灵活！
+性能：
+![ScreenShot](https://raw.github.com/xpmozong/wavephp/master/wavephp.jpg)
 
 
 1、框架目录结构
